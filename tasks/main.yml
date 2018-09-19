@@ -27,6 +27,6 @@
   include: object.yml
   with_items: "{{ backup_objects }}"
   loop_control:
-    loop_var: objects
+    loop_var: object
   when:
     - backup_objects is defined
