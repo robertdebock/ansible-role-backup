@@ -2,7 +2,7 @@
 - name: archive directory object
   archive:
     path: "{{ object.source }}"
-    dest: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ ansible_date_time.date }}-{{ ansible_date_time.hour }}-{{ ansible_date_time.minute }}.tar.gz"
+    dest: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ timestamp }}.tar.gz"
   when:
     - object.type == "directory"
 
@@ -10,18 +10,18 @@
   mysql_db:
     name: "{{ object.name }}"
     state: dump
-    target: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ ansible_date_time.date }}-{{ ansible_date_time.hour }}-{{ ansible_date_time.minute }}.sql.gz"
+    target: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ timestamp }}.sql.gz"
   when:
     - object.type == "mysql"
 
 - name: fetch object
   fetch:
     dest: "{{ backup_directory }}"
-    src: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ ansible_date_time.date }}-{{ ansible_date_time.hour }}-{{ ansible_date_time.minute }}.tar.gz"
+    src: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ timestamp }}.tar.gz"
 
 - name: cleanup object
   file:
-    path: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ ansible_date_time.date }}-{{ ansible_date_time.hour }}-{{ ansible_date_time.minute }}.tar.gz"
+    path: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ timestamp }}.tar.gz"
     state: absent
   when:
     - backup_cleanup
