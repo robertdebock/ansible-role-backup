@@ -2,7 +2,7 @@
 # defaults file for backup
 
 # The directory on the Ansible controller where to store backups.
-backup_directory: /data/backups
+backup_directory: backups
 
 # The directory on the Ansible managed node where to temporarily store backups.
 backup_remote_directory: /tmp
