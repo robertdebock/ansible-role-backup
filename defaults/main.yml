@@ -1,0 +1,31 @@
+---
+# defaults file for backup
+
+# The directory on the Ansible controller where to store backups.
+backup_directory: /data/backups
+
+# The directory on the Ansible managed node where to temporarily store backups.
+backup_remote_directory: /tmp
+
+# A list of objects to backup. Each item has these parameters:
+# - name: A name of the object.
+# - type: either "directory" or "mysql".
+#   - "directory" will archive all files and directories found in the "source".
+#   - "mysql" will make a mysql dump of the "source".
+# - source: either
+#   - a path (when type == directory) or
+#   -  a database name (when type == mysql )
+#
+# For example:
+# backup_objects:
+#   - name: home
+#     type: directory
+#     source: /home
+#   - name: drupal
+#     type: mysql
+#     source: drupal
+
+backup_objects:
+  - name: etc
+    type: directory
+    source: /etc
