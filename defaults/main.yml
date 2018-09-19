@@ -7,6 +7,9 @@ backup_directory: backups
 # The directory on the Ansible managed node where to temporarily store backups.
 backup_remote_directory: /tmp
 
+# Cleanup files created on the {{ backup_remote_directory }} when done?
+backup_cleanup: no
+
 # A list of objects to backup. Each item has these parameters:
 # - name: A name of the object.
 # - type: either "directory" or "mysql".
