@@ -13,7 +13,7 @@
 
 - name: create remote_backup_directory
   file:
-    path "{{ backup_remote_directory }}"
+    path: "{{ backup_remote_directory }}"
     state: directory
 
 - name: create backup_directory
