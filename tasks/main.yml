@@ -23,10 +23,9 @@
   delegate_to: localhost
   become: no
 
-- name: loop over directories
+- name: loop over objects in backup_objects
   include: object.yml
-  with_items:
-    - "{{ backup_objects }}"
+  with_items: "{{ backup_objects }}"
   loop_control:
     loop_var: objects
   when:

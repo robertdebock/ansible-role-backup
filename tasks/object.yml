@@ -4,7 +4,7 @@
     path: "{{ object.source }}"
     dest: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ ansible_date_time.date }}-{{ ansible_date_time.hour }}-{{ ansible_date_time.minute }}.tar.gz"
   when:
-    - object.type == direcory
+    - object.type == "direcory"
 
 - name: archive mysql object
   mysql_db:
@@ -12,7 +12,7 @@
     state: dump
     target: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ ansible_date_time.date }}-{{ ansible_date_time.hour }}-{{ ansible_date_time.minute }}.sql.gz"
   when:
-    - object.type == mysql
+    - object.type == "mysql"
 
 - name: fetch object
   fetch:
