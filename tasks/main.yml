@@ -23,10 +23,6 @@
   delegate_to: localhost
   become: no
 
-- name: save the timestamp
-  set_fact:
-    timestamp: "{{ ansible_date_time.date }}-{{ ansible_date_time.hour }}-{{ ansible_date_time.minute }}"
-
 - name: loop over objects in backup_objects
   include_tasks: object.yml
   with_items: "{{ backup_objects }}"

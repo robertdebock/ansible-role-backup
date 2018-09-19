@@ -10,6 +10,9 @@ backup_remote_directory: /tmp
 # Cleanup files created on the {{ backup_remote_directory }} when done?
 backup_cleanup: no
 
+# What timestamp format to use when saving files.
+backup_timestamp: "{{ ansible_date_time.date }}-{{ ansible_date_time.hour }}"
+
 # A list of objects to backup. Each item has these parameters:
 # - name: A name of the object.
 # - type: either "directory" or "mysql".
