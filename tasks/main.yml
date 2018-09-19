@@ -24,7 +24,7 @@
   become: no
 
 - name: loop over objects in backup_objects
-  include: object.yml
+  include_tasks: object.yml
   with_items: "{{ backup_objects }}"
   loop_control:
     loop_var: object
