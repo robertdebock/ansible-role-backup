@@ -26,6 +26,6 @@ backup_remote_directory: /tmp
 #     source: drupal
 
 backup_objects:
-  - name: etc
+  - name: varlog
     type: directory
-    source: /etc
+    source: /var/log
