@@ -1,8 +1,4 @@
 ---
-- name: show shit
-  debug:
-    var: backup_directory
-
 - name: archive directory object
   archive:
     path: "{{ object.source }}"
