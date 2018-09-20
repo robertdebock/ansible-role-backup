@@ -7,3 +7,4 @@
   roles:
     - role: robertdebock.bootstrap
     - role: ansible-role-backup
+      backup_cleanup: no

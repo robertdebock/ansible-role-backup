@@ -63,8 +63,13 @@ Example Playbook
   roles:
     - role: robertdebock.bootstrap
     - role: robertdebock.backup
-      backup_parameter: value
+      backup_objects:
+        - name: home
+          type: directory
+          source: /hom
 ```
+
+Nota bene: This role is not idempotent, because it's a list of actions, not a state.
 
 To install this role:
 - Install this role individually using `ansible-galaxy install robertdebock.backup`
@@ -74,6 +79,7 @@ Sample roles/requirements.yml: (install with `ansible-galaxy install -r roles/re
 ---
 - name: robertdebock.bootstrap
 - name: robertdebock.backup
+   
 ```
 
 License
