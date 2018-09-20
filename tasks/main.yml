@@ -18,7 +18,7 @@
 
 - name: create backup_directory
   file:
-    path: "{{ backup_directory }}"
+    path: "{{ backup_directory }}/{{ inventory_hostname }}"
     state: directory
   delegate_to: localhost
   become: no
