@@ -11,7 +11,15 @@
   mysql_db:
     name: "{{ object.name }}"
     state: dump
-    target: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ backup_timestamp }}.{{ backup_format }}"
+    target: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ backup_timestamp }}.sql"
+  when:
+    - object.type == "mysql"
+
+- name: compress mysql object
+  archive:
+    path: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ backup_timestamp }}.sql"
+    dest: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ backup_timestamp }}.{{ backup_format }}"
+    format: "{{ backup_format }}"
   when:
     - object.type == "mysql"
 
