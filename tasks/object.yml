@@ -16,9 +16,11 @@
 
 - name: fetch object
   fetch:
-    dest: "{{ backup_directory }}/"
     src: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ backup_timestamp }}.tar.gz"
+    dest: "{{ backup_directory }}/{{ inventory_hostname }}/"
     flat: yes
+    validate_checksum: no
+  become: no
 
 - name: cleanup object
   file:
