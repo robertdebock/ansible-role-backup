@@ -32,6 +32,6 @@ backup_timestamp: "{{ ansible_date_time.date }}-{{ ansible_date_time.hour }}"
 #     source: drupal
 
 backup_objects:
-  - name: varlog
+  - name: varmail
     type: directory
-    source: /var/log
+    source: /var/mail
