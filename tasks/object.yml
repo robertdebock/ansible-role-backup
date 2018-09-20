@@ -20,7 +20,7 @@
 
 - name: fetch object
   fetch:
-    dest: "{{ backup_directory }}"
+    dest: "{{ backup_directory }}/"
     src: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ backup_timestamp }}.tar.gz"
     flat: yes
 
