@@ -11,7 +11,7 @@ backup_remote_directory: /tmp
 backup_cleanup: no
 
 # What timestamp format to use when saving files.
-backup_timestamp: "{{ ansible_date_time.date }}-{{ ansible_date_time.hour }}"
+backup_timestamp: "{{ ansible_date_time.date }}"
 
 # A list of objects to backup. Each item has these parameters:
 # - name: A name of the object.
@@ -32,6 +32,6 @@ backup_timestamp: "{{ ansible_date_time.date }}-{{ ansible_date_time.hour }}"
 #     source: drupal
 
 backup_objects:
-  - name: varmail
+  - name: varspool
     type: directory
-    source: /var/mail
+    source: /var/spool

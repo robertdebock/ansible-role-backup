@@ -2,7 +2,8 @@
 - name: archive directory object
   archive:
     path: "{{ object.source }}"
-    dest: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ backup_timestamp }}.tar.gz"
+    dest: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ backup_timestamp }}.{{ backup_format }}"
+    format: "{{ backup_format }}"
   when:
     - object.type == "directory"
 
@@ -10,21 +11,20 @@
   mysql_db:
     name: "{{ object.name }}"
     state: dump
-    target: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ backup_timestamp }}.sql.gz"
+    target: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ backup_timestamp }}.{{ backup_format }}"
   when:
     - object.type == "mysql"
 
 - name: fetch object
   fetch:
-    src: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ backup_timestamp }}.tar.gz"
+    src: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ backup_timestamp }}.{{ backup_format }}"
     dest: "{{ backup_directory }}/{{ inventory_hostname }}/"
     flat: yes
-    validate_checksum: no
   become: no
 
 - name: cleanup object
   file:
-    path: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ backup_timestamp }}.tar.gz"
+    path: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ backup_timestamp }}.{{ backup_format }}"
     state: absent
   when:
     - backup_cleanup

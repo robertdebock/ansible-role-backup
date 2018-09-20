@@ -1,3 +1,6 @@
 ---
 # vars file for backup
-# backup_parameter: value
+
+# The format to use to compress objects.
+backup_format: zip
+
