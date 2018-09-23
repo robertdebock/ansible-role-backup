@@ -11,19 +11,37 @@ This role is a part of many compatible roles. Have a look at [the documentation 
 
 The "other part" of this role is the [restore role](https://galaxy.ansible.com/robertdebock/restore). Here is an example of the two working together.
 
-|backup                             |restore                              |
-|-----------------------------------|-------------------------------------|
-| `- name: backup`                  | `- name: restore`                   |
-| `  hosts: all:!localhost`         | `  hosts: all:!localhost`           |
-| `  roles:`                        | `  roles:`                          |
-| `    - role: robertdebock.backup` | `    - robertdebock.restore`        |
-| `      backup_objects:`           | `      restore_objects:`            |
-| `        - name: home`            | `        - name: home`              |
-| `          type: directory`       | `          type: directory`         |
-| `          source: /home`         | `          destination: /`          |
-| `        - name: mydatabase`      | `        - name: mydatabase`        |
-| `          type: mysql`           | `          type: mysql`             |
-| `          source: mydatabase`    | `          destination: mydatabase` |
+backup.yml:
+```
+- name: backup
+  hosts: all:!localhost
+
+  roles:
+    - role: robertdebock.backup
+      backup_objects:
+        - name: home
+          type: directory
+          source: /home
+        - name: mydatabase
+          type: mysql
+          source: mydatabase
+```
+
+restore.yml:
+```
+- name: restore
+  hosts: all:!localhost
+  
+  roles:
+    - robertdebock.restore
+      restore_objects:
+        - name: home
+          type: directory
+          destination: /
+        - name: mydatabase
+          type: mysql
+          destination: mydatabase
+```
 
 Here is an overview of related roles:
 ![dependencies](https://raw.githubusercontent.com/robertdebock/drawings/artifacts/backup.png "Dependency")
