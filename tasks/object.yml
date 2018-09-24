@@ -3,6 +3,7 @@
   archive:
     path: "{{ object.source }}"
     dest: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ backup_timestamp }}.{{ backup_format }}"
+    exclude_path: "{{ object.exclude_path | default(omit) }}"
     format: "{{ backup_format }}"
   when:
     - object.type == "directory"
