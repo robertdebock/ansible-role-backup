@@ -22,6 +22,7 @@ backup.yml:
         - name: home
           type: directory
           source: /home
+          exclude_path: /home/vagrant
         - name: mydatabase
           type: mysql
           source: mydatabase
@@ -38,6 +39,7 @@ restore.yml:
         - name: home
           type: directory
           destination: /
+          exclude: /vagrant
         - name: mydatabase
           type: mysql
           destination: mydatabase
