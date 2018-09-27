@@ -13,6 +13,9 @@ backup_cleanup: yes
 # What timestamp format to use when saving files.
 backup_timestamp: "{{ ansible_date_time.date }}"
 
+# What compression type to use, choose from gz, zip, bz2
+backup_format: gz
+
 # A list of objects to backup. Each item has these parameters:
 # - name: A name of the object.
 # - type: either "directory" or "mysql".
@@ -20,7 +23,8 @@ backup_timestamp: "{{ ansible_date_time.date }}"
 #   - "mysql" will make a mysql dump of the "source".
 # - source: either
 #   - a path (when type == directory) or
-#   -  a database name (when type == mysql )
+#   - a database name (when type == mysql )
+# - format: either gz, zip of bz2
 #
 # For example:
 # backup_objects:
@@ -30,6 +34,7 @@ backup_timestamp: "{{ ansible_date_time.date }}"
 #   - name: drupal
 #     type: mysql
 #     source: drupal
+#     format: zip
 
 backup_objects:
   - name: varspool
