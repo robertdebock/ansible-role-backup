@@ -1,16 +1,5 @@
 ---
 # tasks file for backup
-- name: load default variables
-  include_vars:
-    file: default.yml
-
-- name: load os-specific variables
-  include_vars: "{{ item }}"
-  with_first_found:
-    - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
-    - "{{ ansible_distribution }}.yml"
-    - default.yml
-
 - name: create remote_backup_directory
   file:
     path: "{{ backup_remote_directory }}"
@@ -20,7 +9,7 @@
   file:
     path: "{{ backup_directory }}/{{ inventory_hostname }}"
     state: directory
-  delegate_to: localhost
+  connection: local
   become: no
 
 - name: loop over objects in backup_objects

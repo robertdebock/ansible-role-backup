@@ -1,0 +1,52 @@
+---
+dependency:
+  name: galaxy
+  options:
+    role-file: requirements.yml
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: backup-alpine-edge
+    image: alpine:edge
+    command: sh -c "while true ; do sleep 1 ; done"
+  - name: backup-alpine-latest
+    image: alpine:latest
+    command: sh -c "while true ; do sleep 1 ; done"
+  - name: backup-archlinux
+    image: base/archlinux
+  - name: backup-centos-6
+    image: centos:6
+  - name: backup-centos-latest
+    image: centos:latest
+  - name: backup-debian-latest
+    image: debian:latest
+  - name: backup-debian-stable
+    image: debian:stable
+  - name: backup-debian-unstable
+    image: debian:unstable
+  - name: backup-fedora-latest
+    image: fedora:latest
+  - name: backup-fedora-rawhide
+    image: fedora:rawhide
+  - name: backup-gentoo
+    image: gentoo/stage3-amd64
+  - name: backup-opensuse-leap
+    image: opensuse:leap
+  - name: backup-opensuse-tumbleweed
+    image: opensuse:tumbleweed
+  - name: backup-ubuntu-artful
+    image: ubuntu:artful
+  - name: backup-ubuntu-devel
+    image: ubuntu:devel
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+scenario:
+  name: default
+verifier:
+  name: goss
+  lint:
+    name: yamllint
