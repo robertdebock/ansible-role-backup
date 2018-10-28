@@ -3,70 +3,97 @@ backup
 
 [![Build Status](https://travis-ci.org/robertdebock/ansible-role-backup.svg?branch=master)](https://travis-ci.org/robertdebock/ansible-role-backup)
 
-Provides backup for your system.
+This role allows objects to be backed up using Ansible.
 
-Context
---------
-This role is a part of many compatible roles. Have a look at [the documentation of these roles](https://robertdebock.nl/) for further information.
 
-The "other part" of this role is the [restore role](https://galaxy.ansible.com/robertdebock/restore). Here is an example of the two working together.
+Example Playbook
+----------------
 
-backup.yml:
+This example is taken from `molecule/default/playbook.yml`:
 ```
-- name: backup
-  hosts: all:!localhost
+---
+- name: Converge
+  hosts: all
+  gather_facts: false
+  become: true
 
   roles:
-    - role: robertdebock.backup
-      backup_objects:
-        - name: home
-          type: directory
-          source: /home
-          exclude_path: /home/vagrant
-        - name: mydatabase
-          type: mysql
-          source: mydatabase
+    - role: robertdebock.bootstrap
+    - role: ansible-role-backup
+      backup_cleanup: no
+
 ```
-
-restore.yml:
-```
-- name: restore
-  hosts: all:!localhost
-  
-  roles:
-    - robertdebock.restore
-      restore_objects:
-        - name: home
-          type: directory
-          destination: /
-          exclude: /vagrant
-        - name: mydatabase
-          type: mysql
-          destination: mydatabase
-```
-
-Here is an overview of related roles:
-![dependencies](https://raw.githubusercontent.com/robertdebock/drawings/artifacts/backup.png "Dependency")
-
-Requirements
-------------
-
-- A system installed with required packages to run Ansible. Hint: [bootstrap](https://galaxy.ansible.com/robertdebock/bootstrap).
-- Access to a repository containing packages, likely on the internet.
-- A recent version of Ansible. (Tests run on the last 3 release of Ansible.)
 
 Role Variables
 --------------
 
-- backup_objects:
-    - name: home
-      type: directory
-      source: /home
+These variables are set in `defaults/main.yml`:
+```
+---
+# defaults file for backup
 
-Dependencies
+# The directory on the Ansible controller where to store backups.
+backup_directory: backups
+
+# The directory on the Ansible managed node where to temporarily store backups.
+backup_remote_directory: /tmp
+
+# Cleanup files created on the {{ backup_remote_directory }} when done?
+backup_cleanup: yes
+
+# What timestamp format to use when saving files.
+backup_timestamp: "{{ ansible_date_time.date }}"
+
+# What compression type to use, choose from gz, zip, bz2
+backup_format: gz
+
+# A list of objects to backup. Each item has these parameters:
+# - name: A name of the object.
+# - type: either "directory" or "mysql".
+#   - "directory" will archive all files and directories found in the "source".
+#   - "mysql" will make a mysql dump of the "source".
+# - source: either
+#   - a path (when type == directory) or
+#   - a database name (when type == mysql )
+# - format: either gz, zip of bz2
+#
+# For example:
+# backup_objects:
+#   - name: home
+#     type: directory
+#     source: /home
+#   - name: drupal
+#     type: mysql
+#     source: drupal
+#     format: zip
+
+backup_objects:
+  - name: varspool
+    type: directory
+    source: /var/spool
+
+```
+
+Requirements
 ------------
 
-- None known.
+- Access to a repository containing packages, likely on the internet.
+- A recent version of Ansible. (Tests run on the last 3 release of Ansible.)
+
+These roles can be installed to ensure all requirements are met:
+
+- none
+
+To install all requirements at once: `ansible-galaxy install -r requirements.yml`.
+
+Context
+-------
+
+This role is a part of many compatible roles. Have a look at [the documentation of these roles](https://robertdebock.nl/) for further information.
+
+Here is an overview of related roles:
+![dependencies](https://raw.githubusercontent.com/robertdebock/drawings/artifacts/backup.png "Dependency")
+
 
 Compatibility
 -------------
@@ -93,42 +120,26 @@ This role has been tested against the following distributions and Ansible versio
 
 A single star means the build may fail, it's marked as an experimental build.
 
-Example Playbook
-----------------
+Testing
+-------
 
+[Unit tests](https://travis-ci.org/robertdebock/ansible-role-backup) are done on every commit and periodically.
+
+If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-backup/issues)
+
+To test this role locally please use [Molecule](https://github.com/metacloud/molecule):
 ```
----
-- name: backup
-  hosts: all
-  gather_facts: no
-  become: yes
-
-  roles:
-    - role: robertdebock.bootstrap
-    - role: robertdebock.backup
-      backup_objects:
-        - name: home
-          type: directory
-          source: /home
+pip install molecule
+molecule test
 ```
+There are many specific scenarios available, please have a look in the `molecule/` directory.
 
-Nota bene: This role is not idempotent, because it's a list of actions, not a state.
-
-To install this role:
-- Install this role individually using `ansible-galaxy install robertdebock.backup`
-
-Sample roles/requirements.yml: (install with `ansible-galaxy install -r roles/requirements.yml
-```
----
-- name: robertdebock.bootstrap
-- name: robertdebock.backup
-   
-```
 
 License
 -------
 
-Apache License, Version 2.0
+Apache-2.0
+
 
 Author Information
 ------------------
