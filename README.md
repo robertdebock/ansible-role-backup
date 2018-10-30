@@ -17,10 +17,12 @@ This example is taken from `molecule/default/playbook.yml`:
   gather_facts: false
   become: true
 
+  vars:
+    backup_cleanup: no
+
   roles:
     - robertdebock.bootstrap
     - robertdebock.backup
-      backup_cleanup: no
 
 ```
 
