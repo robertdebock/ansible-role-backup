@@ -4,7 +4,9 @@
   gather_facts: false
   become: true
 
+  vars:
+    backup_cleanup: no
+
   roles:
-    - role: robertdebock.bootstrap
-    - role: ansible-role-backup
-      backup_cleanup: no
+    - robertdebock.bootstrap
+    - ansible-role-backup
