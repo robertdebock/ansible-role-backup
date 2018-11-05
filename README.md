@@ -3,8 +3,7 @@ backup
 
 [![Build Status](https://travis-ci.org/robertdebock/ansible-role-backup.svg?branch=master)](https://travis-ci.org/robertdebock/ansible-role-backup)
 
-This role allows objects to be backed up using Ansible.
-
+The purpose of this role is to make backups of your system.
 
 Example Playbook
 ----------------
