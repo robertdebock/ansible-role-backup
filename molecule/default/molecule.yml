@@ -38,6 +38,8 @@ platforms:
     image: ubuntu:artful
   - name: backup-ubuntu-devel
     image: ubuntu:devel
+  - name: backup-ubuntu-latest
+    image: ubuntu:latest
 provisioner:
   name: ansible
   lint:
