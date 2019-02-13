@@ -34,8 +34,10 @@ platforms:
     image: opensuse:leap
   - name: backup-opensuse-tumbleweed
     image: opensuse:tumbleweed
-  - name: backup-ubuntu-artful
-    image: ubuntu:artful
+  - name: backup-ubuntu-latest
+    image: ubuntu:latest
+  - name: backup-ubuntu-rolling
+    image: ubuntu:rolling
   - name: backup-ubuntu-devel
     image: ubuntu:devel
   - name: backup-ubuntu-latest
