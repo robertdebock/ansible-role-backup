@@ -1,12 +1,8 @@
 ---
 - name: Converge
   hosts: all
-  gather_facts: no
   become: yes
-
-  vars:
-    backup_cleanup: no
+  gather_facts: yes
 
   roles:
-    - robertdebock.bootstrap
     - ansible-role-backup
