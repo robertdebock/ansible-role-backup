@@ -36,4 +36,4 @@
     path: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ backup_timestamp }}.{{ object.format | default(backup_format) }}"
     state: absent
   when:
-    - backup_cleanup
+    - backup_cleanup | bool
