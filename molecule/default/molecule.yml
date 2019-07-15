@@ -25,9 +25,6 @@ platforms:
   - name: backup-centos-latest
     image: centos:latest
     pre_build_image: yes
-  - name: backup-debian-latest
-    image: debian:latest
-    pre_build_image: yes
   - name: backup-debian-stable
     image: debian:stable
     pre_build_image: yes
