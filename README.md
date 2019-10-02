@@ -6,6 +6,9 @@ backup
 
 The purpose of this role is to make backups of your system.
 
+<img src="https://img.shields.io/ansible/role/d/29899"/>
+<img src="https://img.shields.io/ansible/quality/29899"/>
+
 Example Playbook
 ----------------
 
