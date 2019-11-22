@@ -118,7 +118,6 @@ This role has been tested on these [container images](https://hub.docker.com/):
 
 |container|tag|allow_failures|
 |---------|---|--------------|
-|amazonlinux|1|no|
 |amazonlinux|latest|no|
 |alpine|latest|no|
 |alpine|edge|yes|
@@ -137,6 +136,14 @@ This role has been tested on these Ansible versions:
 - ansible>=2.9
 - git+https://github.com/ansible/ansible.git@devel
 
+Exceptions
+----------
+
+Some variarations of the build matrix do not work. These are the variations and reasons why the build won't work:
+
+| variation                 | reason                 |
+|---------------------------|------------------------|
+| amazonlinux:1 | Testing mysql fails, because a dependecy (ansible-role-mysql) is not met. |
 
 
 
