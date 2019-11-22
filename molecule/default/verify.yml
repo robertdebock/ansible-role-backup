@@ -5,7 +5,7 @@
   gather_facts: yes
 
   roles:
-    - role: ansible-role-mysql
+    - role: robertdebock.mysql
       mysql_databases:
         - name: test_db
           encoding: utf8
