@@ -9,7 +9,7 @@ The purpose of this role is to make backups of your system.
 Example Playbook
 ----------------
 
-This example is taken from `molecule/resources/playbook.yml`:
+This example is taken from `molecule/resources/playbook.yml` and is tested on each push, pull request and release.
 ```yaml
 ---
 - name: Converge
@@ -24,7 +24,7 @@ This example is taken from `molecule/resources/playbook.yml`:
     - robertdebock.backup
 ```
 
-The machine you are running this on, may need to be prepared.
+The machine you are running this on, may need to be prepared, I use this playbook to ensure everything is in place to let the role work.
 ```yaml
 ---
 - name: Prepare
@@ -34,6 +34,37 @@ The machine you are running this on, may need to be prepared.
 
   roles:
     - robertdebock.bootstrap
+```
+
+After running this role, this playbook runs to verify that everything works, this may be a good example how you can use this role.
+```yaml
+---
+- name: Verify
+  hosts: all
+  become: yes
+  gather_facts: yes
+
+  roles:
+    - role: robertdebock.mysql
+      mysql_databases:
+        - name: test_db
+          encoding: utf8
+          collation: utf8_bin
+    - role: robertdebock.backup
+      backup_directory: backups
+      backup_remote_directory: /tmp
+      backup_cleanup: yes
+      backup_timestamp: "{{ ansible_date_time.date }}"
+      backup_format: gz
+      backup_objects:
+        - name: home
+          type: directory
+          source: /home
+        - name: test_db
+          type: mysql
+          source: test_db
+          format: zip
+
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
@@ -58,28 +89,8 @@ backup_cleanup: yes
 # What timestamp format to use when saving files.
 backup_timestamp: "{{ ansible_date_time.date }}"
 
-# What compression type to use, choose from gz, zip, bz2
-backup_format: gz
-
-# A list of objects to backup. Each item has these parameters:
-# - name: A name of the object.
-# - type: either "directory" or "mysql".
-#   - "directory" will archive all files and directories found in the "source".
-#   - "mysql" will make a mysql dump of the "source".
-# - source: either
-#   - a path (when type == directory) or
-#   - a database name (when type == mysql )
-# - format: either gz, zip of bz2
-#
-# For example:
-# backup_objects:
-#   - name: home
-#     type: directory
-#     source: /home
-#   - name: drupal
-#     type: mysql
-#     source: drupal
-#     format: zip
+# What compression type to use, choose from tgz, zip, bz2
+backup_format: tgz
 
 backup_objects:
   - name: varspool
@@ -119,8 +130,6 @@ This role has been tested on these [container images](https://hub.docker.com/):
 |container|tag|allow_failures|
 |---------|---|--------------|
 |amazonlinux|latest|no|
-|alpine|latest|no|
-|alpine|edge|yes|
 |debian|unstable|yes|
 |debian|latest|no|
 |centos|7|no|
@@ -144,6 +153,7 @@ Some variarations of the build matrix do not work. These are the variations and 
 | variation                 | reason                 |
 |---------------------------|------------------------|
 | amazonlinux:1 | Testing mysql fails, because a dependecy (ansible-role-mysql) is not met. |
+| alpine | Testing mysql fails, because a dependecy (ansible-role-mysql) is not met. |
 
 
 
