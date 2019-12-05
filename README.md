@@ -50,7 +50,7 @@ After running this role, this playbook runs to verify that everything works, thi
         - name: test_db
           encoding: utf8
           collation: utf8_bin
-    - role: robertdebock.backup
+    - role: {{ galaxy_namespace }}.backup
       backup_directory: backups
       backup_remote_directory: /tmp
       backup_cleanup: yes
@@ -154,7 +154,6 @@ Some variarations of the build matrix do not work. These are the variations and 
 |---------------------------|------------------------|
 | amazonlinux:1 | Testing mysql fails, because a dependecy (ansible-role-mysql) is not met. |
 | alpine | Testing mysql fails, because a dependecy (ansible-role-mysql) is not met. |
-
 
 
 Testing
