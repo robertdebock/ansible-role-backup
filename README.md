@@ -2,7 +2,7 @@ backup
 =========
 
 <img src="https://docs.ansible.com/ansible-tower/3.2.4/html_ja/installandreference/_static/images/logo_invert.png" width="10%" height="10%" alt="Ansible logo" align="right"/>
-<a href="https://travis-ci.org/robertdebock/ansible-role-backup"> <img src="https://travis-ci.org/robertdebock/ansible-role-backup.svg?branch=master" alt="Build status"/></a> <img src="https://img.shields.io/ansible/role/d/"/> <img src="https://img.shields.io/ansible/quality/"/>
+<a href="https://travis-ci.org/robertdebock/ansible-role-backup"> <img src="https://travis-ci.org/robertdebock/ansible-role-backup.svg?branch=master" alt="Build status"/></a> <img src="https://img.shields.io/ansible/role/d/29899"/> <img src="https://img.shields.io/ansible/quality/29899"/>
 
 The purpose of this role is to make backups of your system.
 
@@ -64,7 +64,6 @@ After running this role, this playbook runs to verify that everything works, thi
           type: mysql
           source: test_db
           format: zip
-```
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
