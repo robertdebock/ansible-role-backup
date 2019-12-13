@@ -2,5 +2,3 @@
 *.log
 *.swp
 .tox
-*.gz
-*.zip
