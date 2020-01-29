@@ -13,6 +13,7 @@
     name: "{{ object.name }}"
     state: dump
     target: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ backup_timestamp }}.sql"
+    login_unix_socket: "{{ backup_mysql_socket }}"
   when:
     - object.type == "mysql"
 
