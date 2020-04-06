@@ -8,4 +8,4 @@
     backup_cleanup: no
 
   roles:
-    - ansible-role-backup
+    - role: ansible-role-backup
