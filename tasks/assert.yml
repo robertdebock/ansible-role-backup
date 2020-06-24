@@ -28,7 +28,7 @@
     that:
       - backup_format is defined
       - backup_format | length > 0
-      - backup_format in ["tgz", "zip", "bz2]
+      - backup_format in ["tgz", "zip", "bz2"]
 
 - name: test if backup_objects is set correctly
   assert:
