@@ -13,7 +13,7 @@ backup_cleanup: yes
 # What timestamp format to use when saving files.
 backup_timestamp: "{{ ansible_date_time.date }}"
 
-# What compression type to use, choose from tgz, zip, bz2
+# What compression type to use, choose from gz, tgz, zip, bz2
 backup_format: tgz
 
 backup_objects:
