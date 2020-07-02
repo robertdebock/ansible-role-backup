@@ -48,6 +48,7 @@
       - item.type in ["directory", "mysql"]
       - item.source is defined
       - item.source | length > 0
+    quiet: yes
   loop: "{{ backup_objects }}"
   when:
     - backup_objects is defined
