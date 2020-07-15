@@ -50,5 +50,7 @@
       - item.source | length > 0
     quiet: yes
   loop: "{{ backup_objects }}"
+  loop_control:
+    label: "{{ item.name }}"
   when:
     - backup_objects is defined
