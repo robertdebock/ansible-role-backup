@@ -4,24 +4,28 @@
     that:
       - backup_directory is defined
       - backup_directory | length > 0
+    quiet: yes
 
 - name: test if backup_remote_directory is set correctly
   assert:
     that:
       - backup_remote_directory is defined
       - backup_remote_directory | length > 0
+    quiet: yes
 
 - name: test if backup_cleanup is set correctly
   assert:
     that:
       - backup_cleanup is defined
       - backup_cleanup | type_debug == "bool"
+    quiet: yes
 
 - name: test if backup_timestamp is set correctly
   assert:
     that:
       - backup_timestamp is defined
       - backup_timestamp | length > 0
+    quiet: yes
 
 - name: test if backup_format is set correctly
   assert:
@@ -29,12 +33,14 @@
       - backup_format is defined
       - backup_format | length > 0
       - backup_format in ["gz", "tgz", "zip", "bz2"]
+    quiet: yes
 
 - name: test if backup_objects is set correctly
   assert:
     that:
       - backup_objects | length > 0
       - backup_objects is iterable
+    quiet: yes
   when:
     - backup_objects is defined
 
