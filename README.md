@@ -31,6 +31,11 @@ The machine may need to be prepared using `molecule/resources/prepare.yml`:
 
   roles:
     - role: robertdebock.bootstrap
+    - role: robertdebock.mysql
+      mysql_databases:
+        - name: test_db
+          encoding: utf8
+          collation: utf8_bin
 ```
 
 For verification `molecule/resources/verify.yml` run after the role has been applied.
@@ -42,11 +47,11 @@ For verification `molecule/resources/verify.yml` run after the role has been app
   gather_facts: yes
 
   roles:
-    - role: robertdebock.mysql
-      mysql_databases:
-        - name: test_db
-          encoding: utf8
-          collation: utf8_bin
+    # - role: robertdebock.mysql
+    #   mysql_databases:
+    #     - name: test_db
+    #       encoding: utf8
+    #       collation: utf8_bin
     - role: robertdebock.backup
       backup_directory: backups
       backup_remote_directory: /tmp
