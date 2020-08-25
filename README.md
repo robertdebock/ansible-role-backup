@@ -16,11 +16,9 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
   become: yes
   gather_facts: yes
 
-  vars:
-    backup_cleanup: no
-
   roles:
     - role: robertdebock.backup
+      backup_cleanup: no
 ```
 
 The machine may need to be prepared using `molecule/resources/prepare.yml`:

@@ -4,8 +4,6 @@
   become: yes
   gather_facts: yes
 
-  vars:
-    backup_cleanup: no
-
   roles:
     - role: ansible-role-backup
+      backup_cleanup: no
