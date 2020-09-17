@@ -5,6 +5,7 @@
     dest: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ backup_timestamp }}.{{ object.format | default(backup_format) }}"
     exclude_path: "{{ object.exclude_path | default(omit) }}"
     format: "{{ object.format | default(backup_format) }}"
+    mode: "0640"
   when:
     - object.type == "directory"
 
@@ -22,6 +23,7 @@
     path: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ backup_timestamp }}.sql"
     dest: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ backup_timestamp }}.{{ object.format | default(backup_format) }}"
     format: "{{ object.format | default(backup_format) }}"
+    mode: "0640"
   when:
     - object.type == "mysql"
 
