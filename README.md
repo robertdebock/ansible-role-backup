@@ -44,14 +44,9 @@ For verification `molecule/resources/verify.yml` runs after the role has been ap
 - name: Verify
   hosts: all
   become: yes
-  gather_facts: no
+  gather_facts: yes
 
   roles:
-    # - role: robertdebock.mysql
-    #   mysql_databases:
-    #     - name: test_db
-    #       encoding: utf8
-    #       collation: utf8_bin
     - role: robertdebock.backup
       backup_directory: backups
       backup_remote_directory: /tmp
