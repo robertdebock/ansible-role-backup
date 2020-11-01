@@ -4,9 +4,9 @@
 # The format to use to compress objects.
 backup_format: zip
 
-_backup_mysql_socket:
-  default: /var/run/mysql/mysql.sock
-  Debian: /tmp/mysqld.sock
-  RedHat: /var/lib/mysql/mysql.sock
-
-backup_mysql_socket: "{{ _backup_mysql_socket[ansible_os_family] | default(_backup_mysql_socket['default']) }}"
+# _backup_mysql_socket:
+#   default: /var/run/mysql/mysql.sock
+#   Debian: /var/run/mysqld/mysqld.sock
+#   RedHat: /var/lib/mysql/mysql.sock
+#
+# backup_mysql_socket: "{{ _backup_mysql_socket[ansible_os_family] | default(_backup_mysql_socket['default']) }}"
