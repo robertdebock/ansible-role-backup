@@ -21,7 +21,7 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
       backup_cleanup: no
 ```
 
-The machine may need to be prepared using `molecule/resources/prepare.yml`:
+The machine needs to be prepared in CI this is done using `molecule/resources/prepare.yml`:
 ```yaml
 ---
 - name: Prepare
@@ -37,7 +37,7 @@ The machine may need to be prepared using `molecule/resources/prepare.yml`:
           encoding: utf8
           collation: utf8_bin
 ```
-
+```
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
 
 ## [Role Variables](#role-variables)
