@@ -32,7 +32,7 @@
     that:
       - backup_format is defined
       - backup_format | length > 0
-      - backup_format in ["gz", "tgz", "zip", "bz2"]
+      - backup_format in [ "gz", "tgz", "zip", "bz2" ]
     quiet: yes
 
 - name: test if backup_objects is set correctly
@@ -51,7 +51,7 @@
       - item.name | length > 0
       - item.type is defined
       - item.type | length > 0
-      - item.type in ["directory", "mysql"]
+      - item.type in [ "directory", "mysql" ]
       - item.source is defined
       - item.source | length > 0
     quiet: yes
