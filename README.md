@@ -36,6 +36,13 @@ The machine needs to be prepared in CI this is done using `molecule/resources/pr
         - name: test_db
           encoding: utf8
           collation: utf8_bin
+    - role: robertdebock.buildtools
+    - role: robertdebock.epel
+    - role: robertdebock.python_pip
+    - role: robertdebock.postgres
+      postgres_databases:
+        - name: test_db
+          state: present
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
@@ -79,6 +86,10 @@ backup_objects:
 |-------------|--------|--------|
 | [robertdebock.bootstrap](https://galaxy.ansible.com/robertdebock/bootstrap) | [![Build Status Travis](https://travis-ci.com/robertdebock/ansible-role-bootstrap.svg?branch=master)](https://travis-ci.com/robertdebock/ansible-role-bootstrap) | [![Build Status GitHub](https://github.com/robertdebock/ansible-role-bootstrap/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-bootstrap/actions) |
 | [robertdebock.mysql](https://galaxy.ansible.com/robertdebock/mysql) | [![Build Status Travis](https://travis-ci.com/robertdebock/ansible-role-mysql.svg?branch=master)](https://travis-ci.com/robertdebock/ansible-role-mysql) | [![Build Status GitHub](https://github.com/robertdebock/ansible-role-mysql/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-mysql/actions) |
+| [robertdebock.buildtools](https://galaxy.ansible.com/robertdebock/buildtools) | [![Build Status Travis](https://travis-ci.com/robertdebock/ansible-role-buildtools.svg?branch=master)](https://travis-ci.com/robertdebock/ansible-role-buildtools) | [![Build Status GitHub](https://github.com/robertdebock/ansible-role-buildtools/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-buildtools/actions) |
+| [robertdebock.epel](https://galaxy.ansible.com/robertdebock/epel) | [![Build Status Travis](https://travis-ci.com/robertdebock/ansible-role-epel.svg?branch=master)](https://travis-ci.com/robertdebock/ansible-role-epel) | [![Build Status GitHub](https://github.com/robertdebock/ansible-role-epel/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-epel/actions) |
+| [robertdebock.python_pip](https://galaxy.ansible.com/robertdebock/python_pip) | [![Build Status Travis](https://travis-ci.com/robertdebock/ansible-role-python_pip.svg?branch=master)](https://travis-ci.com/robertdebock/ansible-role-python_pip) | [![Build Status GitHub](https://github.com/robertdebock/ansible-role-python_pip/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-python_pip/actions) |
+| [robertdebock.postgres](https://galaxy.ansible.com/robertdebock/postgres) | [![Build Status Travis](https://travis-ci.com/robertdebock/ansible-role-postgres.svg?branch=master)](https://travis-ci.com/robertdebock/ansible-role-postgres) | [![Build Status GitHub](https://github.com/robertdebock/ansible-role-postgres/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-postgres/actions) |
 
 ## [Context](#context)
 
