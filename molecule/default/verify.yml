@@ -7,7 +7,7 @@
   roles:
     - role: ansible-role-backup
       backup_directory: backups
-      backup_remote_directory: /tmp
+      backup_remote_directory: /data
       backup_cleanup: yes
       backup_timestamp: "{{ ansible_date_time.date }}"
       backup_format: gz
@@ -19,3 +19,6 @@
           type: mysql
           source: test_db
           format: zip
+        - name: test_db
+          type: postgres
+          source: test_db
