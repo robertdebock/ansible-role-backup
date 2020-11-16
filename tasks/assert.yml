@@ -3,42 +3,37 @@
   assert:
     that:
       - backup_directory is defined
-      - backup_directory | length > 0
     quiet: yes
 
 - name: test if backup_remote_directory is set correctly
   assert:
     that:
       - backup_remote_directory is defined
-      - backup_remote_directory | length > 0
     quiet: yes
 
 - name: test if backup_cleanup is set correctly
   assert:
     that:
       - backup_cleanup is defined
-      - backup_cleanup | type_debug == "bool"
+      - backup_cleanup is boolean
     quiet: yes
 
 - name: test if backup_timestamp is set correctly
   assert:
     that:
       - backup_timestamp is defined
-      - backup_timestamp | length > 0
     quiet: yes
 
 - name: test if backup_format is set correctly
   assert:
     that:
       - backup_format is defined
-      - backup_format | length > 0
       - backup_format in [ "gz", "tgz", "zip", "bz2" ]
     quiet: yes
 
 - name: test if backup_objects is set correctly
   assert:
     that:
-      - backup_objects | length > 0
       - backup_objects is iterable
     quiet: yes
   when:
@@ -48,12 +43,9 @@
   assert:
     that:
       - item.name is defined
-      - item.name | length > 0
       - item.type is defined
-      - item.type | length > 0
-      - item.type in [ "directory", "mysql" ]
+      - item.type in [ "directory", "mysql", "postgres" ]
       - item.source is defined
-      - item.source | length > 0
     quiet: yes
   loop: "{{ backup_objects }}"
   loop_control:
