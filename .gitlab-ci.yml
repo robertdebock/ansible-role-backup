@@ -2,7 +2,7 @@
 image: robertdebock/github-action-molecule:2.6.6
 
 services:
-  - docker:19.03.5-dind
+  - docker:dind
 
 variables:
   DOCKER_HOST: "tcp://docker:2375"
