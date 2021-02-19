@@ -7,13 +7,13 @@
   delegate_to: localhost
 
 - name: create remote_backup_directory
-  file:
+  ansible.builtin.file:
     path: "{{ backup_remote_directory }}"
     state: directory
     mode: "0777"
 
 - name: create backup_directory
-  file:
+  ansible.builtin.file:
     path: "{{ backup_directory }}/{{ inventory_hostname }}"
     state: directory
     mode: "0750"
@@ -21,7 +21,7 @@
   become: no
 
 - name: loop over objects in backup_objects
-  include_tasks: object.yml
+  ansible.builtin.include_tasks: object.yml
   loop: "{{ backup_objects }}"
   loop_control:
     loop_var: object
