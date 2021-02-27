@@ -7,5 +7,5 @@ roles:
   - name: robertdebock.python_pip
   - name: robertdebock.postgres
 collections:
-  - name: community.general
+  - name: community.postgresql
   - name: community.mysql
