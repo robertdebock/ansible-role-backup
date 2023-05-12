@@ -12,13 +12,13 @@
       backup_timestamp: "{{ ansible_date_time.date }}"
       backup_format: gz
       backup_objects:
-        - name: home
+        - name: Home
           type: directory
           source: /home
-        - name: test_db
+        - name: Test_db
           type: mysql
           source: test_db
           format: zip
-        - name: test_db
+        - name: Test_db
           type: postgres
           source: test_db
