@@ -14,12 +14,12 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 ---
 - name: Converge
   hosts: all
-  become: yes
-  gather_facts: yes
+  become: true
+  gather_facts: true
 
   roles:
     - role: robertdebock.backup
-      backup_cleanup: no
+      backup_cleanup: false
 ```
 
 The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/robertdebock/ansible-role-backup/blob/master/molecule/default/prepare.yml):
@@ -28,8 +28,8 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
 ---
 - name: Prepare
   hosts: all
-  become: yes
-  gather_facts: no
+  become: true
+  gather_facts: false
 
   roles:
     - role: robertdebock.bootstrap
@@ -64,7 +64,7 @@ backup_directory: backups
 backup_remote_directory: /tmp
 
 # Cleanup files created on the {{ backup_remote_directory }} when done?
-backup_cleanup: yes
+backup_cleanup: true
 
 # What timestamp format to use when saving files.
 backup_timestamp: "{{ ansible_date_time.date }}"

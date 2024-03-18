@@ -1,14 +1,14 @@
 ---
 - name: Verify
   hosts: all
-  become: yes
-  gather_facts: yes
+  become: true
+  gather_facts: true
 
   roles:
     - role: ansible-role-backup
       backup_directory: backups
       backup_remote_directory: /data
-      backup_cleanup: yes
+      backup_cleanup: true
       backup_timestamp: "{{ ansible_date_time.date }}"
       backup_format: gz
       backup_objects:
