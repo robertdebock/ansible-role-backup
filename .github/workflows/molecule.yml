@@ -48,8 +48,6 @@ jobs:
             tag: "latest"
           - image: "ubuntu"
             tag: "jammy"
-          - image: "ubuntu"
-            tag: "focal"
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -90,8 +88,6 @@ jobs:
             tag: "latest"
           - image: "ubuntu"
             tag: "jammy"
-          - image: "ubuntu"
-            tag: "focal"
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -132,8 +128,6 @@ jobs:
             tag: "latest"
           - image: "ubuntu"
             tag: "jammy"
-          - image: "ubuntu"
-            tag: "focal"
     steps:
       - name: checkout
         uses: actions/checkout@v4
