@@ -19,22 +19,22 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 
   roles:
     - role: robertdebock.backup
-      backup_cleanup: false
-      backup_directory: backups
-      backup_remote_directory: /data
-      backup_timestamp: "{{ ansible_date_time.date }}"
-      backup_format: gz
-      backup_objects:
-        - name: home
-          type: directory
-          source: /home
-        - name: test_db
-          type: mysql
-          source: test_db
-          format: zip
-        - name: test_db
-          type: postgres
-          source: test_db
+      # backup_cleanup: false
+      # backup_directory: backups
+      # backup_remote_directory: /data
+      # backup_timestamp: "{{ ansible_date_time.date }}"
+      # backup_format: gz
+      # backup_objects:
+      #   - name: home
+      #     type: directory
+      #     source: /home
+      #   - name: test_db
+      #     type: mysql
+      #     source: test_db
+      #     format: zip
+      #   - name: test_db
+      #     type: postgres
+      #     source: test_db
 ```
 
 The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/robertdebock/ansible-role-backup/blob/master/molecule/default/prepare.yml):
