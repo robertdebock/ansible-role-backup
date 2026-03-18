@@ -22,7 +22,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
       # backup_cleanup: false
       # backup_directory: backups
       # backup_remote_directory: /data
-      # backup_timestamp: "{{ ansible_date_time.date }}"
+      # backup_timestamp: "{{ ansible_facts['date_time'].date }}"
       # backup_format: gz
       # backup_objects:
       #   - name: home
@@ -82,7 +82,7 @@ backup_remote_directory: /tmp
 backup_cleanup: true
 
 # What timestamp format to use when saving files.
-backup_timestamp: "{{ ansible_date_time.date }}"
+backup_timestamp: "{{ ansible_facts['date_time'].date }}"
 
 # What compression type to use, choose from bz2, gz, tar, xz and zip.
 backup_format: zip
@@ -123,10 +123,6 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 
 |container|tags|
 |---------|----|
-|[EL](https://hub.docker.com/r/robertdebock/enterpriselinux)|9|
-|[Debian](https://hub.docker.com/r/robertdebock/debian)|all|
-|[Fedora](https://hub.docker.com/r/robertdebock/fedora)|all|
-|[Ubuntu](https://hub.docker.com/r/robertdebock/ubuntu)|noble, jammy|
 
 The minimum version of Ansible required is 2.12, tests have been done on:
 
