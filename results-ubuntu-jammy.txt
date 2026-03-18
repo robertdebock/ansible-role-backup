@@ -1,0 +1,507 @@
+Test: Ubuntu (jammy)
+============================================================
+
+STDOUT:
+------------------------------------------------------------
+[1;35m[WARNING]: - robertdebock.bootstrap (7.1.6) is already installed - use --force to change version to unspecified[0m
+[1;35m[WARNING]: - robertdebock.mysql (4.4.3) is already installed - use --force to change version to unspecified[0m
+[1;35m[WARNING]: - robertdebock.buildtools (3.1.23) is already installed - use --force to change version to unspecified[0m
+[1;35m[WARNING]: - robertdebock.epel (4.1.7) is already installed - use --force to change version to unspecified[0m
+[1;35m[WARNING]: - robertdebock.python_pip (5.0.0) is already installed - use --force to change version to unspecified[0m
+[1;35m[WARNING]: - robertdebock.postgres (3.2.6) is already installed - use --force to change version to unspecified[0m
+Starting galaxy role install process
+Starting galaxy collection install process
+Nothing to do. All requested collections are already installed. If you want to reinstall them, consider using `--force`.
+Starting galaxy collection install process
+Nothing to do. All requested collections are already installed. If you want to reinstall them, consider using `--force`.
+[1;35m[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.[0m
+[35m[DEPRECATION WARNING]: DEFAULT_MANAGED_STR option. Reason: The `ansible_managed` variable can be set just like any other variable, or a different variable can be used.[0m
+[35mAlternatives: Set the `ansible_managed` variable, or use any custom variable in templates. This feature will be removed from ansible-core version 2.23.[0m
+
+
+PLAY [Destroy] *****************************************************************
+
+TASK [Set async_dir for HOME env] **********************************************
+[32mok: [localhost][0m
+
+TASK [Destroy molecule instance(s)] ********************************************
+[33mchanged: [localhost] => (item=backup-ubuntu-jammy)[0m
+
+TASK [Wait for instance(s) deletion to complete] *******************************
+[1;30mFAILED - RETRYING: [localhost]: Wait for instance(s) deletion to complete (300 retries left).[0m
+[32mok: [localhost] => (item=backup-ubuntu-jammy)[0m
+
+TASK [Delete docker networks(s)] ***********************************************
+[36mskipping: [localhost][0m
+
+PLAY RECAP *********************************************************************
+[33mlocalhost[0m                  : [32mok=3   [0m [33mchanged=1   [0m unreachable=0    failed=0    [36mskipped=1   [0m rescued=0    ignored=0
+
+[1;35m[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.[0m
+[35m[DEPRECATION WARNING]: DEFAULT_MANAGED_STR option. Reason: The `ansible_managed` variable can be set just like any other variable, or a different variable can be used.[0m
+[35mAlternatives: Set the `ansible_managed` variable, or use any custom variable in templates. This feature will be removed from ansible-core version 2.23.[0m
+
+
+playbook: /private/var/folders/ll/v1kcbjlj4ds76bk7xl5k0v_40000gn/T/ansible-prober/prober-ubuntu-jammy-95aedc3f/molecule/default/converge.yml
+[1;35m[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.[0m
+[35m[DEPRECATION WARNING]: DEFAULT_MANAGED_STR option. Reason: The `ansible_managed` variable can be set just like any other variable, or a different variable can be used.[0m
+[35mAlternatives: Set the `ansible_managed` variable, or use any custom variable in templates. This feature will be removed from ansible-core version 2.23.[0m
+
+
+PLAY [Create] ******************************************************************
+
+TASK [Set async_dir for HOME env] **********************************************
+[32mok: [localhost][0m
+
+TASK [Log into a Docker registry] **********************************************
+[36mskipping: [localhost] => (item=(censored due to no_log)) [0m
+[36mskipping: [localhost][0m
+
+TASK [Check presence of custom Dockerfiles] ************************************
+[32mok: [localhost] => (item=backup-ubuntu-jammy)[0m
+
+TASK [Create Dockerfiles from image names] *************************************
+[36mskipping: [localhost] => (item=backup-ubuntu-jammy) [0m
+[36mskipping: [localhost][0m
+
+TASK [Synchronization the context] *********************************************
+[36mskipping: [localhost] => (item=backup-ubuntu-jammy) [0m
+[36mskipping: [localhost][0m
+
+TASK [Discover local Docker images] ********************************************
+[32mok: [localhost] => (item=unix://var/run/docker.sock)[0m
+
+TASK [Create docker network(s)] ************************************************
+[36mskipping: [localhost][0m
+
+TASK [Build an Ansible compatible image (new)] *********************************
+[36mskipping: [localhost] => (item=molecule_local/robertdebock/ubuntu:jammy) [0m
+[36mskipping: [localhost][0m
+
+TASK [Determine the CMD directives] ********************************************
+[32mok: [localhost] => (item=backup-ubuntu-jammy)[0m
+
+TASK [Create molecule instance(s)] *********************************************
+[33mchanged: [localhost] => (item=backup-ubuntu-jammy)[0m
+
+TASK [Wait for instance(s) creation to complete] *******************************
+[1;30mFAILED - RETRYING: [localhost]: Wait for instance(s) creation to complete (300 retries left).[0m
+[33mchanged: [localhost] => (item=backup-ubuntu-jammy)[0m
+
+PLAY RECAP *********************************************************************
+[33mlocalhost[0m                  : [32mok=6   [0m [33mchanged=2   [0m unreachable=0    failed=0    [36mskipped=5   [0m rescued=0    ignored=0
+
+[1;35m[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.[0m
+[35m[DEPRECATION WARNING]: DEFAULT_MANAGED_STR option. Reason: The `ansible_managed` variable can be set just like any other variable, or a different variable can be used.[0m
+[35mAlternatives: Set the `ansible_managed` variable, or use any custom variable in templates. This feature will be removed from ansible-core version 2.23.[0m
+
+
+PLAY [Prepare] *****************************************************************
+
+TASK [robertdebock.bootstrap : Validating arguments against arg spec 'main' - Prepare a system to be managed by Ansible.] ***
+[32mok: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.bootstrap : assert | Test bootstrap_wait_for_host] **********
+[32mok: [backup-ubuntu-jammy -> localhost][0m
+
+TASK [robertdebock.bootstrap : assert | Test bootstrap_timeout] ****************
+[32mok: [backup-ubuntu-jammy -> localhost][0m
+
+TASK [robertdebock.bootstrap : assert | Test bootstrap_become] *****************
+[32mok: [backup-ubuntu-jammy -> localhost][0m
+
+TASK [robertdebock.bootstrap : Wait for port to be available] ******************
+[36mskipping: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.bootstrap : Test connection] ********************************
+[32mok: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.bootstrap : Test sudo] **************************************
+[31m[ERROR]: Task failed: Module failed: Error executing command: [Errno 2] No such file or directory: b'sudo'[0m
+[31mOrigin: /Users/robertdb/.ansible/roles/robertdebock.bootstrap/tasks/main.yml:31:7[0m
+
+[31m29       register: bootstrap_connect[0m
+[31m30       changed_when: false[0m
+[31m31     - name: Test sudo[0m
+[31m         ^ column 7[0m
+
+[31mfatal: [backup-ubuntu-jammy]: FAILED! => {"ansible_facts": {"discovered_interpreter_python": "/usr/bin/python3.10"}, "changed": false, "cmd": "sudo --version", "msg": "Error executing command.", "rc": 2, "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}[0m
+
+TASK [robertdebock.bootstrap : Gather bootstrap facts] *************************
+[36mincluded: /Users/robertdb/.ansible/roles/robertdebock.bootstrap/tasks/gather_facts.yml for backup-ubuntu-jammy[0m
+
+TASK [robertdebock.bootstrap : gather_facts | Lookup bootstrap facts] **********
+[32mok: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.bootstrap : gather_facts | Set bootstrap facts (I)] *********
+[36mskipping: [backup-ubuntu-jammy] => (item=Alpine) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Archlinux) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Antergos) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Manjaro) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Debian) [0m
+[32mok: [backup-ubuntu-jammy] => (item=Ubuntu)[0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Raspbian) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Neon) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=KDE neon) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Linux Mint) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=SteamOS) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Devuan) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Kali) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Cumulus Linux) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Pop!_OS) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Parrot) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Pardus GNU/Linux) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Univention Corporate Server) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Gentoo) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Funtoo) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=RedHat) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Fedora) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=CentOS) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Scientific) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=SLC) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Ascendos) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=CloudLinux) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=PSBM) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Rocky) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=OracleLinux) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=OVS) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=OEL) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Amazon) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Virtuozzo) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=XenServer) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Alibaba) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=EulerOS) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=openEuler) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=AlmaLinux) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=SLED) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=openSUSE Tumbleweed) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=openSUSE Leap) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=SLES_SAP) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=SUSE_LINUX) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=SLES) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=openSUSE) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=SuSE) [0m
+
+TASK [robertdebock.bootstrap : gather_facts | Set bootstrap facts (II)] ********
+[36mskipping: [backup-ubuntu-jammy] => (item=Alpine) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Archlinux) [0m
+[32mok: [backup-ubuntu-jammy] => (item=Debian)[0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Gentoo) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=RedHat) [0m
+[36mskipping: [backup-ubuntu-jammy] => (item=Suse) [0m
+
+TASK [robertdebock.bootstrap : Install bootstrap packages (raw)] ***************
+[33mchanged: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.bootstrap : Gather ansible facts] ***************************
+[32mok: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.bootstrap : Install bootstrap packages (package)] ***********
+[32mok: [backup-ubuntu-jammy] => (item=python3)[0m
+[32mok: [backup-ubuntu-jammy] => (item=sudo)[0m
+[32mok: [backup-ubuntu-jammy] => (item=gnupg)[0m
+[32mok: [backup-ubuntu-jammy] => (item=python3-apt)[0m
+
+TASK [robertdebock.mysql : Validating arguments against arg spec 'main' - Install and configure mysql on your system.] ***
+[32mok: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.mysql : assert | Test mysql_bind_address] *******************
+[32mok: [backup-ubuntu-jammy -> localhost][0m
+
+TASK [robertdebock.mysql : assert | Test mysql_port] ***************************
+[32mok: [backup-ubuntu-jammy -> localhost][0m
+
+TASK [robertdebock.mysql : assert | Test mysql_root_password] ******************
+[32mok: [backup-ubuntu-jammy -> localhost][0m
+
+TASK [robertdebock.mysql : assert | Test mysql_innodb_buffer_pool_size] ********
+[32mok: [backup-ubuntu-jammy -> localhost][0m
+
+TASK [robertdebock.mysql : assert | Test mysql_innodb_io_capacity] *************
+[32mok: [backup-ubuntu-jammy -> localhost][0m
+
+TASK [robertdebock.mysql : assert | Test item.name item in mysql_databases] ****
+[32mok: [backup-ubuntu-jammy -> localhost] => (item=test_db)[0m
+
+TASK [robertdebock.mysql : assert | Test item.state in mysql_databases] ********
+[36mskipping: [backup-ubuntu-jammy] => (item=test_db) [0m
+[36mskipping: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.mysql : assert | Test item.target in mysql_databases] *******
+[36mskipping: [backup-ubuntu-jammy] => (item=test_db) [0m
+[36mskipping: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.mysql : assert | Test item.encoding in mysql_databases] *****
+[32mok: [backup-ubuntu-jammy -> localhost] => (item=test_db)[0m
+
+TASK [robertdebock.mysql : assert | Test item.collation in mysql_databases] ****
+[32mok: [backup-ubuntu-jammy -> localhost] => (item=test_db)[0m
+
+TASK [robertdebock.mysql : assert | Test item.name in mysql_users] *************
+[36mskipping: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.mysql : assert | Test item.password in mysql_users] *********
+[36mskipping: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.mysql : assert | Test item.priv in mysql_users] *************
+[36mskipping: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.mysql : assert | Test item.host in mysql_users] *************
+[36mskipping: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.mysql : assert | Test item.host_all in mysql_users] *********
+[36mskipping: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.mysql : assert | Test item.update_password in mysql_users] ***
+[36mskipping: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.mysql : Install mysql] **************************************
+[33mchanged: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.mysql : Configure mysql server] *****************************
+[33mchanged: [backup-ubuntu-jammy] => (item=bind-address)[0m
+[33mchanged: [backup-ubuntu-jammy] => (item=port)[0m
+[33mchanged: [backup-ubuntu-jammy] => (item=socket)[0m
+[33mchanged: [backup-ubuntu-jammy] => (item=innodb_buffer_pool_size)[0m
+[33mchanged: [backup-ubuntu-jammy] => (item=innodb_io_capacity)[0m
+[33mchanged: [backup-ubuntu-jammy] => (item=log-bin-trust-function-creators)[0m
+
+TASK [robertdebock.mysql : Configure mysql client] *****************************
+[33mchanged: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.mysql : Initialize mysql] ***********************************
+[36mskipping: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.mysql : Start and enable mysql] *****************************
+[33mchanged: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.mysql : Flush handlers] *************************************
+
+RUNNING HANDLER [robertdebock.mysql : Restart mysql server] ********************
+[33mchanged: [backup-ubuntu-jammy][0m
+
+RUNNING HANDLER [robertdebock.mysql : Set root password] ***********************
+[1;35m[WARNING]: Support of mysqlcline/MySQLdb connector is deprecated. We'll stop testing against it in collection version 4.0.0 and remove the related code in 5.0.0. Use PyMySQL connector instead.[0m
+[1;35m[WARNING]: Option column_case_sensitive is not provided. The default is now false, so the column's name will be uppercased. The default will be changed to true in community.mysql 4.0.0.[0m
+[33mchanged: [backup-ubuntu-jammy][0m
+
+RUNNING HANDLER [robertdebock.postgres : Systemctl daemon-reexec] **************
+[32mok: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.mysql : Place my.cnf] ***************************************
+[33mchanged: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.mysql : Create databases] ***********************************
+[33mchanged: [backup-ubuntu-jammy] => (item=(censored due to no_log))[0m
+
+TASK [robertdebock.mysql : List databases] *************************************
+[32mok: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.mysql : Import database] ************************************
+[36mskipping: [backup-ubuntu-jammy] => (item=test_db) [0m
+[36mskipping: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.mysql : Create users] ***************************************
+[36mskipping: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.mysql : Flush handlers again] *******************************
+
+TASK [robertdebock.buildtools : Install buildtools] ****************************
+[33mchanged: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.epel : Install epel gpg key] ********************************
+[36mskipping: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.epel : Install epel-release] ********************************
+[36mskipping: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.epel : Install epel-next-release] ***************************
+[36mskipping: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.python_pip : Validating arguments against arg spec 'main' - Install and configure Python pip on your system.] ***
+[32mok: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.python_pip : assert | Test python_pip_proxy] ****************
+[36mskipping: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.python_pip : assert | Test python_pip_trusted_host] *********
+[36mskipping: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.python_pip : assert | Test python_pip_executable] ***********
+[36mskipping: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.python_pip : Install python pip] ****************************
+[33mchanged: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.python_pip : Configure pip proxy] ***************************
+[36mskipping: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.python_pip : Trust hosts] ***********************************
+[36mskipping: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.postgres : assert | Test postgres_port] *********************
+[32mok: [backup-ubuntu-jammy -> localhost][0m
+
+TASK [robertdebock.postgres : assert | Test postgres_listen_addresses] *********
+[32mok: [backup-ubuntu-jammy -> localhost][0m
+
+TASK [robertdebock.postgres : assert | Test postgres_max_wal_size] *************
+[32mok: [backup-ubuntu-jammy -> localhost][0m
+
+TASK [robertdebock.postgres : assert | Test postgres_min_wal_size] *************
+[32mok: [backup-ubuntu-jammy -> localhost][0m
+
+TASK [robertdebock.postgres : assert | Test postgres_log_timezone] *************
+[32mok: [backup-ubuntu-jammy -> localhost][0m
+
+TASK [robertdebock.postgres : assert | Test postgres_datestyle] ****************
+[32mok: [backup-ubuntu-jammy -> localhost][0m
+
+TASK [robertdebock.postgres : assert | Test postgres_timezone] *****************
+[32mok: [backup-ubuntu-jammy -> localhost][0m
+
+TASK [robertdebock.postgres : assert | Test postgres_default_text_search_config] ***
+[32mok: [backup-ubuntu-jammy -> localhost][0m
+
+TASK [robertdebock.postgres : assert | Test postgres_hba_entries] **************
+[32mok: [backup-ubuntu-jammy -> localhost][0m
+
+TASK [robertdebock.postgres : assert | Test postgres_databases] ****************
+[32mok: [backup-ubuntu-jammy -> localhost][0m
+
+TASK [robertdebock.postgres : assert | Test item.conn_limit in postgres_databases] ***
+[36mskipping: [backup-ubuntu-jammy] => (item=test_db) [0m
+[36mskipping: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.postgres : assert | Test item.trust_input in postgres_databases] ***
+[36mskipping: [backup-ubuntu-jammy] => (item=test_db) [0m
+[36mskipping: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.postgres : assert | Test item.state in postgres_databases] ***
+[32mok: [backup-ubuntu-jammy -> localhost] => (item=test_db)[0m
+
+TASK [robertdebock.postgres : Install postgres] ********************************
+[33mchanged: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.postgres : Create postgres data directory] ******************
+[33mchanged: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.postgres : Initialize database] *****************************
+[36mskipping: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.postgres : Configure postgres] ******************************
+[33mchanged: [backup-ubuntu-jammy] => (item=port)[0m
+[33mchanged: [backup-ubuntu-jammy] => (item=listen_addresses)[0m
+[33mchanged: [backup-ubuntu-jammy] => (item=unix_socket_directories)[0m
+[33mchanged: [backup-ubuntu-jammy] => (item=log_timezone)[0m
+[33mchanged: [backup-ubuntu-jammy] => (item=datestyle)[0m
+[33mchanged: [backup-ubuntu-jammy] => (item=timezone)[0m
+[32mok: [backup-ubuntu-jammy] => (item=default_text_search_config)[0m
+
+TASK [robertdebock.postgres : Configure wal parameters] ************************
+[33mchanged: [backup-ubuntu-jammy] => (item=max_wal_size)[0m
+[33mchanged: [backup-ubuntu-jammy] => (item=min_wal_size)[0m
+
+TASK [robertdebock.postgres : Create pg_hba.conf] ******************************
+[33mchanged: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.postgres : Flush handlers] **********************************
+
+RUNNING HANDLER [robertdebock.postgres : Systemctl daemon-reexec] **************
+[32mok: [backup-ubuntu-jammy][0m
+
+RUNNING HANDLER [robertdebock.postgres : Restart postgres] *********************
+[33mchanged: [backup-ubuntu-jammy][0m
+
+RUNNING HANDLER [robertdebock.postgres : Reload postgres] **********************
+[33mchanged: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.postgres : Start and enable postgres] ***********************
+[32mok: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.postgres : Install psycopg2-binary (pip)] *******************
+[36mskipping: [backup-ubuntu-jammy][0m
+
+TASK [robertdebock.postgres : Flush handlers again] ****************************
+
+TASK [robertdebock.postgres : Create postgres database] ************************
+[33mchanged: [backup-ubuntu-jammy] => (item=test_db)[0m
+
+TASK [robertdebock.postgres : Create postgres users] ***************************
+[36mskipping: [backup-ubuntu-jammy][0m
+
+PLAY RECAP *********************************************************************
+[33mbackup-ubuntu-jammy[0m        : [32mok=55  [0m [33mchanged=19  [0m unreachable=0    failed=0    [36mskipped=25  [0m [32mrescued=1   [0m ignored=0
+
+[1;35m[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.[0m
+[35m[DEPRECATION WARNING]: DEFAULT_MANAGED_STR option. Reason: The `ansible_managed` variable can be set just like any other variable, or a different variable can be used.[0m
+[35mAlternatives: Set the `ansible_managed` variable, or use any custom variable in templates. This feature will be removed from ansible-core version 2.23.[0m
+
+[31m[ERROR]: the role 'robertdebock.backup' was not found in /private/var/folders/ll/v1kcbjlj4ds76bk7xl5k0v_40000gn/T/ansible-prober/prober-ubuntu-jammy-95aedc3f/molecule/default/roles:/Users/robertdb/.ansible/roles:/usr/share/ansible/roles:/etc/ansible/roles:/private/var/folders/ll/v1kcbjlj4ds76bk7xl5k0v_40000gn/T/ansible-prober/prober-ubuntu-jammy-95aedc3f/molecule/default[0m
+[31mOrigin: /private/var/folders/ll/v1kcbjlj4ds76bk7xl5k0v_40000gn/T/ansible-prober/prober-ubuntu-jammy-95aedc3f/molecule/default/converge.yml:8:7[0m
+
+[31m6[0m
+[31m7   roles:[0m
+[31m8     - role: robertdebock.backup[0m
+[31m        ^ column 7[0m
+
+[1;35m[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.[0m
+[35m[DEPRECATION WARNING]: DEFAULT_MANAGED_STR option. Reason: The `ansible_managed` variable can be set just like any other variable, or a different variable can be used.[0m
+[35mAlternatives: Set the `ansible_managed` variable, or use any custom variable in templates. This feature will be removed from ansible-core version 2.23.[0m
+
+
+PLAY [Destroy] *****************************************************************
+
+TASK [Set async_dir for HOME env] **********************************************
+[32mok: [localhost][0m
+
+TASK [Destroy molecule instance(s)] ********************************************
+[33mchanged: [localhost] => (item=backup-ubuntu-jammy)[0m
+
+TASK [Wait for instance(s) deletion to complete] *******************************
+[1;30mFAILED - RETRYING: [localhost]: Wait for instance(s) deletion to complete (300 retries left).[0m
+[33mchanged: [localhost] => (item=backup-ubuntu-jammy)[0m
+
+TASK [Delete docker networks(s)] ***********************************************
+[36mskipping: [localhost][0m
+
+PLAY RECAP *********************************************************************
+[33mlocalhost[0m                  : [32mok=3   [0m [33mchanged=2   [0m unreachable=0    failed=0    [36mskipped=1   [0m rescued=0    ignored=0
+
+
+
+STDERR:
+------------------------------------------------------------
+[35mWARNING [0m Driver docker does not provide a schema.
+[35mWARNING [0m Driver docker does not provide a schema.
+[36mINFO    [0m [32mdefault[0m ? [33mdiscovery[0m: scenario test matrix: dependency, cleanup, destroy, syntax, create, prepare, converge, idempotence, side_effect, verify, cleanup, destroy
+[36mINFO    [0m [32mdefault[0m ? [33mprerun[0m: Performing prerun with role_name_check=0...
+[36mINFO    [0m [32mdefault[0m ? [33mdependency[0m: [36mExecuting[0m
+[36mINFO    [0m [32mdefault[0m ? [33mdependency[0m: Dependency completed successfully.
+[36mINFO    [0m [32mdefault[0m ? [33mdependency[0m: Dependency completed successfully.
+[36mINFO    [0m [32mdefault[0m ? [33mdependency[0m: [32mExecuted: Successful[0m
+[36mINFO    [0m [32mdefault[0m ? [33mcleanup[0m: [36mExecuting[0m
+[35mWARNING [0m [32mdefault[0m ? [33mcleanup[0m: [35mExecuted: Missing playbook[0m [2m(Remove from test_sequence to suppress)[0m
+[36mINFO    [0m [32mdefault[0m ? [33mdestroy[0m: [36mExecuting[0m
+[36mINFO    [0m Sanity checks: 'docker'
+[36mINFO    [0m [32mdefault[0m ? [33mdestroy[0m: [32mExecuted: Successful[0m
+[36mINFO    [0m [32mdefault[0m ? [33msyntax[0m: [36mExecuting[0m
+[36mINFO    [0m [32mdefault[0m ? [33msyntax[0m: [32mExecuted: Successful[0m
+[36mINFO    [0m [32mdefault[0m ? [33mcreate[0m: [36mExecuting[0m
+[36mINFO    [0m [32mdefault[0m ? [33mcreate[0m: [32mExecuted: Successful[0m
+[36mINFO    [0m [32mdefault[0m ? [33mprepare[0m: [36mExecuting[0m
+[36mINFO    [0m [32mdefault[0m ? [33mprepare[0m: [32mExecuted: Successful[0m
+[36mINFO    [0m [32mdefault[0m ? [33mconverge[0m: [36mExecuting[0m
+[31m[1mCRITICAL[0m Ansible return code was 1, command was: ansible-playbook --inventory /Users/robertdb/.ansible/tmp/molecule.TZPd.default/inventory --skip-tags molecule-notest,notest /private/var/folders/ll/v1kcbjlj4ds76bk7xl5k0v_40000gn/T/ansible-prober/prober-ubuntu-jammy-95aedc3f/molecule/default/converge.yml
+[31mERROR   [0m [32mdefault[0m ? [33mconverge[0m: [31mExecuted: Failed[0m
+[35mWARNING [0m [32mdefault[0m ? [33mconverge[0m: An error occurred during the test sequence action: 'converge'. Cleaning up.
+[36mINFO    [0m [32mdefault[0m ? [33mcleanup[0m: [36mExecuting[0m
+[35mWARNING [0m [32mdefault[0m ? [33mcleanup[0m: [35mExecuted: Missing playbook[0m [2m(Remove from test_sequence to suppress)[0m
+[36mINFO    [0m [32mdefault[0m ? [33mdestroy[0m: [36mExecuting[0m
+[36mINFO    [0m [32mdefault[0m ? [33mdestroy[0m: [32mExecuted: Successful[0m
+[36mINFO    [0m [32mdefault[0m ? [33mscenario[0m: Pruning extra files from scenario ephemeral directory
+[31mERROR   [0m Ansible return code was 1, command was: ansible-playbook --inventory /Users/robertdb/.ansible/tmp/molecule.TZPd.default/inventory --skip-tags molecule-notest,notest /private/var/folders/ll/v1kcbjlj4ds76bk7xl5k0v_40000gn/T/ansible-prober/prober-ubuntu-jammy-95aedc3f/molecule/default/converge.yml
+[31mERROR   [0m Molecule executed 1 scenario ([31m1 failed[0m)
+
+
+Return code: 1

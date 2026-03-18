@@ -11,7 +11,7 @@ backup_remote_directory: /tmp
 backup_cleanup: true
 
 # What timestamp format to use when saving files.
-backup_timestamp: "{{ ansible_date_time.date }}"
+backup_timestamp: "{{ ansible_facts['date_time'].date }}"
 
 # What compression type to use, choose from bz2, gz, tar, xz and zip.
 backup_format: zip

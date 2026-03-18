@@ -1,0 +1,157 @@
+Test: Debian (bullseye)
+============================================================
+
+STDOUT:
+------------------------------------------------------------
+[1;35m[WARNING]: - robertdebock.bootstrap (7.1.6) is already installed - use --force to change version to unspecified[0m
+[1;35m[WARNING]: - robertdebock.mysql (4.4.3) is already installed - use --force to change version to unspecified[0m
+[1;35m[WARNING]: - robertdebock.buildtools (3.1.23) is already installed - use --force to change version to unspecified[0m
+[1;35m[WARNING]: - robertdebock.epel (4.1.7) is already installed - use --force to change version to unspecified[0m
+[1;35m[WARNING]: - robertdebock.python_pip (5.0.0) is already installed - use --force to change version to unspecified[0m
+[1;35m[WARNING]: - robertdebock.postgres (3.2.6) is already installed - use --force to change version to unspecified[0m
+Starting galaxy role install process
+Starting galaxy collection install process
+Nothing to do. All requested collections are already installed. If you want to reinstall them, consider using `--force`.
+Starting galaxy collection install process
+Nothing to do. All requested collections are already installed. If you want to reinstall them, consider using `--force`.
+[1;35m[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.[0m
+[35m[DEPRECATION WARNING]: DEFAULT_MANAGED_STR option. Reason: The `ansible_managed` variable can be set just like any other variable, or a different variable can be used.[0m
+[35mAlternatives: Set the `ansible_managed` variable, or use any custom variable in templates. This feature will be removed from ansible-core version 2.23.[0m
+
+
+PLAY [Destroy] *****************************************************************
+
+TASK [Set async_dir for HOME env] **********************************************
+[32mok: [localhost][0m
+
+TASK [Destroy molecule instance(s)] ********************************************
+[33mchanged: [localhost] => (item=backup-fedora-latest)[0m
+
+TASK [Wait for instance(s) deletion to complete] *******************************
+[1;30mFAILED - RETRYING: [localhost]: Wait for instance(s) deletion to complete (300 retries left).[0m
+[32mok: [localhost] => (item=backup-fedora-latest)[0m
+
+TASK [Delete docker networks(s)] ***********************************************
+[36mskipping: [localhost][0m
+
+PLAY RECAP *********************************************************************
+[33mlocalhost[0m                  : [32mok=3   [0m [33mchanged=1   [0m unreachable=0    failed=0    [36mskipped=1   [0m rescued=0    ignored=0
+
+[1;35m[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.[0m
+[35m[DEPRECATION WARNING]: DEFAULT_MANAGED_STR option. Reason: The `ansible_managed` variable can be set just like any other variable, or a different variable can be used.[0m
+[35mAlternatives: Set the `ansible_managed` variable, or use any custom variable in templates. This feature will be removed from ansible-core version 2.23.[0m
+
+
+playbook: /private/var/folders/ll/v1kcbjlj4ds76bk7xl5k0v_40000gn/T/ansible-prober/prober-debian-bullseye-a0ef82b3/molecule/default/converge.yml
+[1;35m[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.[0m
+[35m[DEPRECATION WARNING]: DEFAULT_MANAGED_STR option. Reason: The `ansible_managed` variable can be set just like any other variable, or a different variable can be used.[0m
+[35mAlternatives: Set the `ansible_managed` variable, or use any custom variable in templates. This feature will be removed from ansible-core version 2.23.[0m
+
+
+PLAY [Create] ******************************************************************
+
+TASK [Set async_dir for HOME env] **********************************************
+[32mok: [localhost][0m
+
+TASK [Log into a Docker registry] **********************************************
+[36mskipping: [localhost] => (item=(censored due to no_log)) [0m
+[36mskipping: [localhost][0m
+
+TASK [Check presence of custom Dockerfiles] ************************************
+[32mok: [localhost] => (item=backup-debian-bullseye)[0m
+
+TASK [Create Dockerfiles from image names] *************************************
+[36mskipping: [localhost] => (item=backup-debian-bullseye) [0m
+[36mskipping: [localhost][0m
+
+TASK [Synchronization the context] *********************************************
+[36mskipping: [localhost] => (item=backup-debian-bullseye) [0m
+[36mskipping: [localhost][0m
+
+TASK [Discover local Docker images] ********************************************
+[32mok: [localhost] => (item=unix://var/run/docker.sock)[0m
+
+TASK [Create docker network(s)] ************************************************
+[36mskipping: [localhost][0m
+
+TASK [Build an Ansible compatible image (new)] *********************************
+[36mskipping: [localhost] => (item=molecule_local/robertdebock/debian:bullseye) [0m
+[36mskipping: [localhost][0m
+
+TASK [Determine the CMD directives] ********************************************
+[32mok: [localhost] => (item=backup-debian-bullseye)[0m
+
+TASK [Create molecule instance(s)] *********************************************
+[33mchanged: [localhost] => (item=backup-debian-bullseye)[0m
+
+TASK [Wait for instance(s) creation to complete] *******************************
+[31m[ERROR]: Task failed: Module failed: Error creating container: 409 Client Error for http+docker://localhost/v1.51/containers/create?name=backup-debian-bullseye: Conflict ("Conflict. The container name "/backup-debian-bullseye" is already in use by container "f4c32eefbe6f62fbb5fbc6585852ecec89989744b6ffdc44f165e61354793618". You have to remove (or rename) that container to be able to reuse that name.")[0m
+[31mOrigin: /Users/robertdb/venv/lib/python3.13/site-packages/molecule_plugins/docker/playbooks/create.yml:206:7[0m
+
+[31m204       poll: 0[0m
+[31m205[0m
+[31m206     - name: Wait for instance(s) creation to complete[0m
+[31m          ^ column 7[0m
+
+[31mfailed: [localhost] (item=backup-debian-bullseye) => {"ansible_job_id": "j2499868603.19516", "ansible_loop_var": "item", "attempts": 2, "changed": false, "finished": true, "item": {"ansible_job_id": "j2499868603.19516", "ansible_loop_var": "item", "changed": true, "failed": false, "finished": false, "item": {"cgroupns_mode": "host", "command": "/sbin/init", "image": "robertdebock/debian:bullseye", "name": "backup-debian-bullseye", "pre_build_image": true, "privileged": true, "volumes": ["/sys/fs/cgroup:/sys/fs/cgroup:rw"]}, "results_file": "/Users/robertdb/.ansible_async/j2499868603.19516", "started": true}, "msg": "Error creating container: 409 Client Error for http+docker://localhost/v1.51/containers/create?name=backup-debian-bullseye: Conflict (\"Conflict. The container name \"/backup-debian-bullseye\" is already in use by container \"f4c32eefbe6f62fbb5fbc6585852ecec89989744b6ffdc44f165e61354793618\". You have to remove (or rename) that container to be able to reuse that name.\")", "results_file": "/Users/robertdb/.ansible_async/j2499868603.19516", "started": true, "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}[0m
+[1;30mFAILED - RETRYING: [localhost]: Wait for instance(s) creation to complete (300 retries left).[0m
+
+PLAY RECAP *********************************************************************
+[31mlocalhost[0m                  : [32mok=5   [0m [33mchanged=1   [0m unreachable=0    [31mfailed=1   [0m [36mskipped=5   [0m rescued=0    ignored=0
+
+[1;35m[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.[0m
+[35m[DEPRECATION WARNING]: DEFAULT_MANAGED_STR option. Reason: The `ansible_managed` variable can be set just like any other variable, or a different variable can be used.[0m
+[35mAlternatives: Set the `ansible_managed` variable, or use any custom variable in templates. This feature will be removed from ansible-core version 2.23.[0m
+
+
+PLAY [Destroy] *****************************************************************
+
+TASK [Set async_dir for HOME env] **********************************************
+[32mok: [localhost][0m
+
+TASK [Destroy molecule instance(s)] ********************************************
+[33mchanged: [localhost] => (item=backup-debian-bullseye)[0m
+
+TASK [Wait for instance(s) deletion to complete] *******************************
+[1;30mFAILED - RETRYING: [localhost]: Wait for instance(s) deletion to complete (300 retries left).[0m
+[33mchanged: [localhost] => (item=backup-debian-bullseye)[0m
+
+TASK [Delete docker networks(s)] ***********************************************
+[36mskipping: [localhost][0m
+
+PLAY RECAP *********************************************************************
+[33mlocalhost[0m                  : [32mok=3   [0m [33mchanged=2   [0m unreachable=0    failed=0    [36mskipped=1   [0m rescued=0    ignored=0
+
+
+
+STDERR:
+------------------------------------------------------------
+[35mWARNING [0m Driver docker does not provide a schema.
+[35mWARNING [0m Driver docker does not provide a schema.
+[36mINFO    [0m [32mdefault[0m ? [33mdiscovery[0m: scenario test matrix: dependency, cleanup, destroy, syntax, create, prepare, converge, idempotence, side_effect, verify, cleanup, destroy
+[36mINFO    [0m [32mdefault[0m ? [33mprerun[0m: Performing prerun with role_name_check=0...
+[36mINFO    [0m [32mdefault[0m ? [33mdependency[0m: [36mExecuting[0m
+[36mINFO    [0m [32mdefault[0m ? [33mdependency[0m: Dependency completed successfully.
+[36mINFO    [0m [32mdefault[0m ? [33mdependency[0m: Dependency completed successfully.
+[36mINFO    [0m [32mdefault[0m ? [33mdependency[0m: [32mExecuted: Successful[0m
+[36mINFO    [0m [32mdefault[0m ? [33mcleanup[0m: [36mExecuting[0m
+[35mWARNING [0m [32mdefault[0m ? [33mcleanup[0m: [35mExecuted: Missing playbook[0m [2m(Remove from test_sequence to suppress)[0m
+[36mINFO    [0m [32mdefault[0m ? [33mdestroy[0m: [36mExecuting[0m
+[36mINFO    [0m Sanity checks: 'docker'
+[36mINFO    [0m [32mdefault[0m ? [33mdestroy[0m: [32mExecuted: Successful[0m
+[36mINFO    [0m [32mdefault[0m ? [33msyntax[0m: [36mExecuting[0m
+[36mINFO    [0m [32mdefault[0m ? [33msyntax[0m: [32mExecuted: Successful[0m
+[36mINFO    [0m [32mdefault[0m ? [33mcreate[0m: [36mExecuting[0m
+[31m[1mCRITICAL[0m Ansible return code was 2, command was: ansible-playbook --inventory /Users/robertdb/.ansible/tmp/molecule.bocv.default/inventory --skip-tags molecule-notest,notest /Users/robertdb/venv/lib/python3.13/site-packages/molecule_plugins/docker/playbooks/create.yml
+[31mERROR   [0m [32mdefault[0m ? [33mcreate[0m: [31mExecuted: Failed[0m
+[35mWARNING [0m [32mdefault[0m ? [33mcreate[0m: An error occurred during the test sequence action: 'create'. Cleaning up.
+[36mINFO    [0m [32mdefault[0m ? [33mcleanup[0m: [36mExecuting[0m
+[35mWARNING [0m [32mdefault[0m ? [33mcleanup[0m: [35mExecuted: Missing playbook[0m [2m(Remove from test_sequence to suppress)[0m
+[36mINFO    [0m [32mdefault[0m ? [33mdestroy[0m: [36mExecuting[0m
+[36mINFO    [0m [32mdefault[0m ? [33mdestroy[0m: [32mExecuted: Successful[0m
+[36mINFO    [0m [32mdefault[0m ? [33mscenario[0m: Pruning extra files from scenario ephemeral directory
+[31mERROR   [0m Ansible return code was 2, command was: ansible-playbook --inventory /Users/robertdb/.ansible/tmp/molecule.bocv.default/inventory --skip-tags molecule-notest,notest /Users/robertdb/venv/lib/python3.13/site-packages/molecule_plugins/docker/playbooks/create.yml
+[31mERROR   [0m Molecule executed 1 scenario ([31m1 failed[0m)
+
+
+Return code: 2

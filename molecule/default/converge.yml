@@ -9,7 +9,7 @@
       # backup_cleanup: false
       # backup_directory: backups
       # backup_remote_directory: /data
-      # backup_timestamp: "{{ ansible_date_time.date }}"
+      # backup_timestamp: "{{ ansible_facts['date_time'].date }}"
       # backup_format: gz
       # backup_objects:
       #   - name: home

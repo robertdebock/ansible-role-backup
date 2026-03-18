@@ -1,0 +1,65 @@
+Test: Debian (bookworm)
+============================================================
+
+STDOUT:
+------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/robertdb/venv/bin/molecule", line 7, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/click/core.py", line 1462, in __call__
+    return self.main(*args, **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/click/core.py", line 1383, in main
+    rv = self.invoke(ctx)
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/click/core.py", line 1850, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/click/core.py", line 1246, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/click/core.py", line 814, in invoke
+    return callback(*args, **kwargs)
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/molecule/click_cfg.py", line 583, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/click/decorators.py", line 34, in new_func
+    return f(get_current_context(), *args, **kwargs)
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/molecule/click_cfg.py", line 418, in wrapper
+    return func(ctx)
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/molecule/command/test.py", line 81, in test
+    base.execute_cmdline_scenarios(scenario_name, args, command_args, ansible_args, exclude)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/molecule/command/base.py", line 154, in execute_cmdline_scenarios
+    configs.extend(get_configs(args, command_args, ansible_args, glob_str))
+                   ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/molecule/command/base.py", line 445, in get_configs
+    config.Config(
+    ~~~~~~~~~~~~~^
+        molecule_file=util.abs_path(c),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        ansible_args=ansible_args,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/molecule/config.py", line 138, in __init__
+    self.config = self._reget_config()
+                  ~~~~~~~~~~~~~~~~~~^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/molecule/config.py", line 537, in _reget_config
+    env = util.merge_dicts(os.environ, self.env)
+                                       ^^^^^^^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/molecule/config.py", line 379, in env
+    "MOLECULE_STATE_FILE": self.state.state_file,
+                           ^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.9_1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/functools.py", line 1026, in __get__
+    val = self.func(instance)
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/molecule/config.py", line 448, in state
+    if my_state.molecule_yml_date_modified is None:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/molecule/state.py", line 187, in molecule_yml_date_modified
+    return self._data["molecule_yml_date_modified"]
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'molecule_yml_date_modified'
+
+
+Return code: 1

@@ -1,0 +1,86 @@
+Test: Fedora (40)
+============================================================
+
+STDOUT:
+------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/ansible/config/manager.py", line 547, in get_config_value
+    value, _drop = self.get_config_value_and_origin(config, cfile=cfile, plugin_type=plugin_type, plugin_name=plugin_name,
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                    keys=keys, variables=variables, direct=direct)
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/ansible/config/manager.py", line 671, in get_config_value_and_origin
+    value = ensure_type(value, defs[config].get('type'), origin=origin, origin_ftype=origin_ftype)
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/ansible/config/manager.py", line 110, in ensure_type
+    value = _ensure_type(value, value_type, origin)
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/ansible/config/manager.py", line 174, in _ensure_type
+    return resolve_path(value, basedir=basedir)
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/ansible/config/manager.py", line 233, in resolve_path
+    return unfrackpath(path, follow=False, basedir=basedir)
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/ansible/utils/path.py", line 51, in unfrackpath
+    b_basedir = to_bytes(os.getcwd(), errors='surrogate_or_strict')
+                         ~~~~~~~~~^^
+FileNotFoundError: [Errno 2] No such file or directory
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/robertdb/venv/bin/molecule", line 7, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/click/core.py", line 1462, in __call__
+    return self.main(*args, **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/click/core.py", line 1383, in main
+    rv = self.invoke(ctx)
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/click/core.py", line 1850, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/click/core.py", line 1246, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/click/core.py", line 814, in invoke
+    return callback(*args, **kwargs)
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/molecule/click_cfg.py", line 583, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/click/decorators.py", line 34, in new_func
+    return f(get_current_context(), *args, **kwargs)
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/molecule/click_cfg.py", line 418, in wrapper
+    return func(ctx)
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/molecule/command/test.py", line 81, in test
+    base.execute_cmdline_scenarios(scenario_name, args, command_args, ansible_args, exclude)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/molecule/command/base.py", line 154, in execute_cmdline_scenarios
+    configs.extend(get_configs(args, command_args, ansible_args, glob_str))
+                   ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/molecule/command/base.py", line 445, in get_configs
+    config.Config(
+    ~~~~~~~~~~~~~^
+        molecule_file=util.abs_path(c),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        ansible_args=ansible_args,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/molecule/config.py", line 133, in __init__
+    self.app = get_app(Path(self.project_directory))
+               ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/molecule/app.py", line 103, in get_app
+    return App(path)
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/molecule/app.py", line 30, in __init__
+    self.runtime = Runtime(project_dir=path, isolated=False)
+                   ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/ansible_compat/runtime.py", line 261, in __init__
+    from ansible.utils.display import Display
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/ansible/utils/display.py", line 51, in <module>
+    from ansible import constants as C
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/ansible/constants.py", line 188, in <module>
+    set_constant(setting, config.get_config_value(setting, variables=vars()))
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/ansible/config/manager.py", line 552, in get_config_value
+    raise AnsibleError(f"Unhandled exception when retrieving {config!r}.") from ex
+ansible.errors.AnsibleError: Unhandled exception when retrieving 'PERSISTENT_CONTROL_PATH_DIR': [Errno 2] No such file or directory
+
+
+Return code: 1

@@ -1,0 +1,79 @@
+Test: Debian (latest)
+============================================================
+
+STDOUT:
+------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/robertdb/venv/bin/molecule", line 7, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/click/core.py", line 1462, in __call__
+    return self.main(*args, **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/click/core.py", line 1383, in main
+    rv = self.invoke(ctx)
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/click/core.py", line 1850, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/click/core.py", line 1246, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/click/core.py", line 814, in invoke
+    return callback(*args, **kwargs)
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/molecule/click_cfg.py", line 583, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/click/decorators.py", line 34, in new_func
+    return f(get_current_context(), *args, **kwargs)
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/molecule/click_cfg.py", line 418, in wrapper
+    return func(ctx)
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/molecule/command/test.py", line 81, in test
+    base.execute_cmdline_scenarios(scenario_name, args, command_args, ansible_args, exclude)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/molecule/command/base.py", line 169, in execute_cmdline_scenarios
+    _run_scenarios(scenarios, command_args, default_config)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/molecule/command/base.py", line 240, in _run_scenarios
+    scenario.config.runtime.prepare_environment(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        install_local=True,
+        ^^^^^^^^^^^^^^^^^^^
+        role_name_check=role_name_check,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/ansible_compat/runtime.py", line 736, in prepare_environment
+    self.install_requirements(file_path, retry=retry, offline=offline)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/ansible_compat/runtime.py", line 669, in install_requirements
+    raise AnsibleCommandError(result)
+ansible_compat.errors.AnsibleCommandError: Got 5 exit code while running: ansible-galaxy role install -r /private/var/folders/ll/v1kcbjlj4ds76bk7xl5k0v_40000gn/T/ansible-prober/prober-debian-bookworm-42e23da5/requirements.yml --roles-path /Users/robertdb/.ansible/roles
+
+
+STDERR:
+------------------------------------------------------------
+[35mWARNING [0m Driver docker does not provide a schema.
+[35mWARNING [0m Driver docker does not provide a schema.
+[36mINFO    [0m [32mdefault[0m ? [33mdiscovery[0m: scenario test matrix: dependency, cleanup, destroy, syntax, create, prepare, converge, idempotence, side_effect, verify, cleanup, destroy
+[36mINFO    [0m [32mdefault[0m ? [33mprerun[0m: Performing prerun with role_name_check=0...
+[31mERROR   [0m ERROR:  No such file or directory
+
+Traceback (most recent call last):
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/ansible/cli/__init__.py", line 91, in <module>
+    from ansible import constants as C
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/ansible/constants.py", line 18, in <module>
+    config = ConfigManager()
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/ansible/config/manager.py", line 350, in __init__
+    self._config_file = find_ini_config_file(self.WARNINGS)
+                        ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/ansible/config/manager.py", line 290, in find_ini_config_file
+    potential_paths.append(unfrackpath("~/.ansible.cfg", follow=False))
+                           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/robertdb/venv/lib/python3.13/site-packages/ansible/utils/path.py", line 51, in unfrackpath
+    b_basedir = to_bytes(os.getcwd(), errors='surrogate_or_strict')
+                         ~~~~~~~~~^^
+FileNotFoundError:  No such file or directory
+
+
+
+
+Return code: 1
