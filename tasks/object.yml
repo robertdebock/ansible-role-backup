@@ -11,7 +11,7 @@
     - object.type == "directory"
 
 - name: object | Dump mysql object
-  community.mysql.mysql_db:
+  ansible.mysql.mysql_db:
     name: "{{ object.name }}"
     state: dump
     target: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ backup_timestamp }}.sql"
