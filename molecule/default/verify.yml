@@ -1,5 +1,210 @@
 ---
-- name: Verify
+- name: Verify | prepare an unprivileged user to connect with
   hosts: all
   become: true
+  gather_facts: false
+
+  tasks:
+    - name: Install packages required to verify
+      ansible.builtin.package:
+        name:
+          # Required for Ansible to become the unprivileged postgres user.
+          - acl
+          # Required to unpack a fetched backup.
+          - unzip
+        state: present
+
+    - name: Create an unprivileged user
+      ansible.builtin.user:
+        name: backupuser
+        create_home: true
+
+    - name: Allow the unprivileged user to escalate privileges
+      ansible.builtin.copy:
+        content: "backupuser ALL=(ALL) NOPASSWD: ALL\n"
+        dest: /etc/sudoers.d/backupuser
+        mode: "0440"
+
+# Facts are gathered because backup_timestamp defaults to the date fact.
+- name: Verify | back up and restore objects as an unprivileged user
+  hosts: all
+  remote_user: backupuser
+  become: true
   gather_facts: true
+
+  vars:
+    # The docker connection keeps HOME pointing at /root, so the unprivileged
+    # user can't use the default remote temporary directory.
+    ansible_remote_tmp: /tmp/.ansible-backupuser
+
+  pre_tasks:
+    - name: Test what user Ansible connects with
+      ansible.builtin.command:
+        cmd: id --user --name
+      become: false
+      changed_when: false
+      register: verify_connection_user
+
+    - name: Assert Ansible connects with an unprivileged user
+      ansible.builtin.assert:
+        that:
+          - verify_connection_user.stdout == "backupuser"
+        quiet: true
+
+    - name: Place a marker in the mysql object
+      ansible.mysql.mysql_query:
+        login_db: test_db
+        query:
+          - CREATE TABLE IF NOT EXISTS backup_marker (name VARCHAR(16))
+          - DELETE FROM backup_marker
+          - INSERT INTO backup_marker (name) VALUES ('backup')
+
+    - name: Place a marker in the postgres object
+      community.postgresql.postgresql_query:
+        db: test_db
+        query:
+          - CREATE TABLE IF NOT EXISTS backup_marker (name VARCHAR(16))
+          - DELETE FROM backup_marker
+          - INSERT INTO backup_marker (name) VALUES ('backup')
+      become_user: postgres
+      become: true
+
+  roles:
+    - role: robertdebock.backup
+      backup_directory: "{{ playbook_dir }}/backups"
+      backup_objects:
+        - name: test_db
+          type: mysql
+          source: test_db
+        - name: test_db
+          type: postgres
+          source: test_db
+
+  post_tasks:
+    - name: Test if the objects have been fetched to the controller
+      ansible.builtin.stat:
+        path: "{{ backup_directory }}/{{ inventory_hostname }}/{{ item }}"
+      delegate_to: localhost
+      become: false
+      register: verify_fetched_object
+      loop:
+        - "mysql-test_db-{{ backup_timestamp }}.{{ backup_format }}"
+        - "postgres-test_db-{{ backup_timestamp }}.{{ backup_format }}"
+
+    - name: Assert the objects have been fetched to the controller
+      ansible.builtin.assert:
+        that:
+          - item.stat.exists
+          - item.stat.size > 0
+        quiet: true
+      loop: "{{ verify_fetched_object.results }}"
+      loop_control:
+        label: "{{ item.item }}"
+
+    - name: Test if the objects have been removed from the managed node
+      ansible.builtin.stat:
+        path: "{{ backup_remote_directory }}/{{ item }}"
+      register: verify_remote_object
+      loop:
+        - "mysql-test_db-{{ backup_timestamp }}.{{ backup_format }}"
+        - "postgres-test_db-{{ backup_timestamp }}.{{ backup_format }}"
+        - "mysql-test_db-{{ backup_timestamp }}.sql"
+        - "postgres-test_db-{{ backup_timestamp }}.sql"
+
+    - name: Assert the objects have been removed from the managed node
+      ansible.builtin.assert:
+        that:
+          - not item.stat.exists
+        quiet: true
+      loop: "{{ verify_remote_object.results }}"
+      loop_control:
+        label: "{{ item.item }}"
+
+    # Restoring proves the fetched backups are usable. Nothing is left on the
+    # managed node to restore from, so only the fetched backups can bring back
+    # the markers placed before the backup was made.
+    - name: Remove the marker from the mysql object
+      ansible.mysql.mysql_query:
+        login_db: test_db
+        query: DROP TABLE backup_marker
+
+    - name: Remove the marker from the postgres object
+      community.postgresql.postgresql_query:
+        db: test_db
+        query: DROP TABLE backup_marker
+      become_user: postgres
+      become: true
+
+    - name: Test if the marker has been removed from the mysql object
+      ansible.mysql.mysql_query:
+        login_db: test_db
+        query: >-
+          SELECT COUNT(*) AS markers FROM information_schema.tables
+          WHERE table_schema = 'test_db' AND table_name = 'backup_marker'
+      changed_when: false
+      register: verify_mysql_removed
+
+    - name: Test if the marker has been removed from the postgres object
+      community.postgresql.postgresql_query:
+        db: test_db
+        query: >-
+          SELECT COUNT(*) AS markers FROM information_schema.tables
+          WHERE table_name = 'backup_marker'
+      become_user: postgres
+      become: true
+      changed_when: false
+      register: verify_postgres_removed
+
+    - name: Assert the markers have been removed
+      ansible.builtin.assert:
+        that:
+          - verify_mysql_removed.query_result[0][0].markers == 0
+          - verify_postgres_removed.query_result[0].markers == 0
+        quiet: true
+
+    - name: Unpack the fetched objects on the managed node
+      ansible.builtin.unarchive:
+        src: "{{ backup_directory }}/{{ inventory_hostname }}/{{ item }}-test_db-{{ backup_timestamp }}.{{ backup_format }}"
+        dest: "{{ backup_remote_directory }}"
+      loop:
+        - mysql
+        - postgres
+
+    - name: Restore the mysql object
+      ansible.mysql.mysql_db:
+        name: test_db
+        state: import
+        target: "{{ backup_remote_directory }}/mysql-test_db-{{ backup_timestamp }}.sql"
+
+    - name: Restore the postgres object
+      community.postgresql.postgresql_db:
+        name: test_db
+        state: restore
+        target: "{{ backup_remote_directory }}/postgres-test_db-{{ backup_timestamp }}.sql"
+      become_user: postgres
+      become: true
+
+    - name: Test if the mysql object has been restored
+      ansible.mysql.mysql_query:
+        login_db: test_db
+        query: SELECT name FROM backup_marker
+      changed_when: false
+      register: verify_mysql_restored
+
+    - name: Test if the postgres object has been restored
+      community.postgresql.postgresql_query:
+        db: test_db
+        query: SELECT name FROM backup_marker
+      become_user: postgres
+      become: true
+      changed_when: false
+      register: verify_postgres_restored
+
+    - name: Assert the objects have been restored
+      ansible.builtin.assert:
+        that:
+          - verify_mysql_restored.query_result[0] | length == 1
+          - verify_mysql_restored.query_result[0][0].name == "backup"
+          - verify_postgres_restored.query_result | length == 1
+          - verify_postgres_restored.query_result[0].name == "backup"
+        quiet: true

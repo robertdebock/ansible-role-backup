@@ -42,14 +42,16 @@
     src: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ backup_timestamp }}.{{ object.format | default(backup_format) }}"
     dest: "{{ backup_directory }}/{{ inventory_hostname }}/"
     flat: true
-  become: false
   when:
     - object.type in [ "mysql", "postgres" ]
 
 - name: object | Cleanup object
   ansible.builtin.file:
-    path: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ backup_timestamp }}.{{ object.format | default(backup_format) }}"
+    path: "{{ backup_remote_directory }}/{{ object.type }}-{{ object.name }}-{{ backup_timestamp }}.{{ item }}"
     state: absent
+  loop:
+    - "{{ object.format | default(backup_format) }}"
+    - sql
   when:
     - backup_cleanup
     - object.type in [ "mysql", "postgres" ]
