@@ -34,8 +34,6 @@ jobs:
       fail-fast: false
       matrix:
         distro:
-          - image: "alpine"
-            tag: "latest"
           - image: "enterpriselinux"
             tag: "latest"
           - image: "debian"

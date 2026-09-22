@@ -25,6 +25,18 @@
         dest: /etc/sudoers.d/backupuser
         mode: "0440"
 
+    # On some container hosts pam_unix can't retrieve account information,
+    # which makes sudo refuse to run whatever sudoers says. These tests are
+    # about Ansible, not about PAM, so take PAM out of the equation.
+    - name: Make the sudo pam stack permissive
+      ansible.builtin.copy:
+        content: |
+          auth       sufficient   pam_permit.so
+          account    sufficient   pam_permit.so
+          session    required     pam_permit.so
+        dest: /etc/pam.d/sudo
+        mode: "0644"
+
 # Facts are gathered because backup_timestamp defaults to the date fact.
 - name: Verify | back up and restore objects as an unprivileged user
   hosts: all
